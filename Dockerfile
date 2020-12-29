@@ -41,7 +41,9 @@ RUN cd ${GAME_DIR} \
  && curl -sLo- "http://users.alliedmods.net/~kyles/builds/SteamWorks/SteamWorks-git132-linux.tar.gz" | tar xvzf - \
  && rm ${GAME_DIR}/addons/sourcemod/plugins/playercommands.smx \
        ${GAME_DIR}/addons/sourcemod/plugins/funvotes.smx \
-       ${GAME_DIR}/addons/sourcemod/plugins/funcommands.smx
+       ${GAME_DIR}/addons/sourcemod/plugins/funcommands.smx \
+ && curl -sL "https://raw.githubusercontent.com/lanofdoom/counterstrikesource-max-cash/6c48d983ea61a146c108d431f17d1ca4ac6403da/latest/max_cash.smx" \
+ -o ${GAME_DIR}/addons/sourcemod/plugins/max_cash.smx
 
 COPY server.cfg ${GAME_DIR}/cfg
 COPY metamod.vdf ${GAME_DIR}/addons
