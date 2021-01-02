@@ -40,7 +40,7 @@ RUN cd ${GAME_DIR} \
  && rm ${GAME_DIR}/addons/sourcemod/plugins/playercommands.smx \
        ${GAME_DIR}/addons/sourcemod/plugins/funvotes.smx \
        ${GAME_DIR}/addons/sourcemod/plugins/funcommands.smx \
- && curl -sL "https://raw.githubusercontent.com/lanofdoom/counterstrikesource-max-cash/6c48d983ea61a146c108d431f17d1ca4ac6403da/latest/max_cash.smx" \
+ && curl -sL "https://lanofdoom.github.io/counterstrikesource-max-cash/releases/v1.0.0/max_cash.smx" \
  -o ${GAME_DIR}/addons/sourcemod/plugins/max_cash.smx
 
 ADD maps.tar.gz ${GAME_DIR}/
