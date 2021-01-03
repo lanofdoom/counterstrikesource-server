@@ -34,6 +34,7 @@ USER nobody
 COPY --chown=nobody:root --from=steam-install-cstrike /opt/install $SRCDS_DIR
 
 RUN cd ${GAME_DIR} \
+ && curl -sLo- "https://lanofdoom.github.io/counterstrikesource-maps/releases/v1.0.0/maps.tar.gz" | tar xvzf - \
  && curl -sLo- "https://sm.alliedmods.net/smdrop/1.10/sourcemod-1.10.0-git6502-linux.tar.gz" | tar xvzf - \
  && curl -sLo- "https://mms.alliedmods.net/mmsdrop/1.11/mmsource-1.11.0-git1143-linux.tar.gz" | tar xvzf - \
  && curl -sLo- "http://users.alliedmods.net/~kyles/builds/SteamWorks/SteamWorks-git132-linux.tar.gz" | tar xvzf - \
@@ -43,7 +44,6 @@ RUN cd ${GAME_DIR} \
  && curl -sL "https://lanofdoom.github.io/counterstrikesource-max-cash/releases/v1.0.0/max_cash.smx" \
  -o ${GAME_DIR}/addons/sourcemod/plugins/max_cash.smx
 
-ADD maps.tar.gz ${GAME_DIR}/
 RUN ls ${GAME_DIR}/maps/*.bsp | grep -v test | sed -e 's/.*\/\([^\/]*\).bsp/\1/' > ${GAME_DIR}/cfg/mapcycle.txt
 
 COPY server.cfg ${GAME_DIR}/cfg
