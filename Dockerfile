@@ -52,4 +52,4 @@ COPY metamod.vdf ${GAME_DIR}/addons
 COPY admins_simple.ini ${GAME_DIR}/addons/sourcemod/configs
 COPY motd.txt ${GAME_DIR}/cfg/motd.txt
 
-ENTRYPOINT ["/opt/game/srcds_linux", "-game cstrike", "+map de_dust2", "-strictbindport"]
+ENTRYPOINT ["/opt/game/srcds_linux", "-game cstrike", "-tickrate 100", "+map de_dust2", "-strictbindport"]
