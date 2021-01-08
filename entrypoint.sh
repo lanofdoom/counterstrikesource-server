@@ -1,12 +1,5 @@
 #!/bin/bash
 
-# Ensure server is up to date
-/opt/steam/steamcmd.sh \
-    +login anonymous \
-    +force_install_dir /opt/game \
-    +app_update 232330 validate \
-    +quit
-
 # Start Server
 /opt/game/srcds_linux \
     -game cstrike \
