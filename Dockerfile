@@ -48,4 +48,6 @@ RUN ls ${GAME_DIR}/maps/*.bsp | grep -v test | sed -e 's/.*\/\([^\/]*\).bsp/\1/'
 COPY rtv.cfg ${GAME_DIR}/cfg/sourcemod
 COPY server.cfg ${GAME_DIR}/cfg
 
-ENTRYPOINT ["/opt/game/srcds_linux", "-game cstrike", "-tickrate 100", "+map de_dust2", "-strictbindport"]
+# Configure entrypoint
+COPY entrypoint.sh /opt/game/entrypoint.sh
+CMD /opt/game/entrypoint.sh
