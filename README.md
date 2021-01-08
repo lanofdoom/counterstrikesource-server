@@ -1,6 +1,9 @@
 # LAN of DOOM Counter-Strike: Source Server
 Docker image for a private, preconfigured private Counter-Strike: Source server as used by the LAN of DOOM.
 
+# Installation
+Run ``docker pull ghcr.io/lanofdoom/counterstrikesource-server/counterstrikesource-server:latest``
+
 # Installed Addons
 *  LAN of DOOM Authenticate by Steam Group
 *  LAN of DOOM Max Cash
