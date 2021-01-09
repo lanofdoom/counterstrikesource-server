@@ -32,6 +32,7 @@ RUN cd ${GAME_DIR} \
 
 # Enable Metamod (required for SourceMod)
 COPY metamod.vdf ${GAME_DIR}/addons
+COPY metamod_x64.vdf ${GAME_DIR}/addons
 
 # Enable/disable the desired set of sourcemod plugins
 RUN cd ${GAME_DIR}/addons/sourcemod/plugins \
