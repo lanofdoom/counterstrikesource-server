@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Start Server
-/opt/game/srcds_linux \
+LD_LIBRARY_PATH="/opt/game:/opt/game/bin:$LD_LIBRARY_PATH" /opt/game/srcds_linux \
     -game cstrike \
     -tickrate 100 \
     -strictbindport \
