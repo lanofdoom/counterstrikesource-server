@@ -1,7 +1,10 @@
-#!/bin/bash
+#!/bin/bash -ue
 
-# Start Server
-LD_LIBRARY_PATH="/opt/game:/opt/game/bin:$LD_LIBRARY_PATH" /opt/game/srcds_linux \
+[ -z "${CSS_MOTD}" ] || echo "${CSS_MOTD}" > /opt/game/cstrike/motd.txt
+
+[ -z "${CSS_ADMIN}" ] || echo "${CSS_ADMIN} \"99:z\"" > /opt/game/cstrike/addons/sourcemod/configs/admins_simple.ini
+
+LD_LIBRARY_PATH="/opt/game:/opt/game/bin:${LD_LIBRARY_PATH:-}" /opt/game/srcds_linux \
     -game cstrike \
     -tickrate 100 \
     -strictbindport \

@@ -1,28 +1,21 @@
 FROM ubuntu:focal
 
-# Environmental variables for frequently modified server settings
-ENV CSS_HOSTNAME ""
-ENV RCON_PASSWORD ""
-ENV STEAM_GROUP_ID ""
-ENV STEAM_API_KEY ""
-
 # Download and install steamcmd and srcds
-RUN  dpkg --add-architecture i386 && apt-get update && export DEBIAN_FRONTEND=noninteractive \
-   && apt-get install --no-install-recommends -y -o APT::Immediate-Configure=0 \
-   ca-certificates \
-   curl \
-   lib32gcc1 \
-   libc6 \
-   libcurl4:i386 \
-   libncurses5:i386 \
-   unzip \
-   && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
+RUN dpkg --add-architecture i386 && apt-get update && export DEBIAN_FRONTEND=noninteractive \
+ && apt-get install --no-install-recommends -y -o APT::Immediate-Configure=0 \
+    ca-certificates \
+    curl \
+    lib32gcc1 \
+    libc6 \
+    libcurl4:i386 \
+    libncurses5:i386 \
+    unzip \
+ && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 
-RUN mkdir -p /opt/steam && curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf - -C /opt/steam
+RUN mkdir -p /opt/steam \
+ && curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf - -C /opt/steam
+
 RUN /opt/steam/steamcmd.sh +login anonymous +force_install_dir /opt/game +app_update 232330 validate +quit || true
-RUN chown -R nobody:root /opt/steam /opt/game
-
-USER nobody
 
 # Download plugins and maps
 RUN cd /opt/game/cstrike \
@@ -34,8 +27,7 @@ RUN cd /opt/game/cstrike \
  && curl -sL "https://lanofdoom.github.io/counterstrikesource-max-cash/releases/v1.0.0/max_cash.smx" -o /opt/game/cstrike/addons/sourcemod/plugins/max_cash.smx
 
 # Enable Metamod (required for SourceMod)
-COPY metamod.vdf /opt/game/cstrike/addons
-COPY metamod_x64.vdf /opt/game/cstrike/addons
+COPY metamod.vdf metamod_x64.vdf /opt/game/cstrike/addons/
 
 # Enable/disable the desired set of sourcemod plugins
 RUN cd /opt/game/cstrike/addons/sourcemod/plugins \
@@ -54,4 +46,10 @@ COPY server.cfg /opt/game/cstrike/cfg
 
 # Configure entrypoint
 COPY entrypoint.sh /opt/game/entrypoint.sh
-CMD /opt/game/entrypoint.sh
+ENTRYPOINT /opt/game/entrypoint.sh
+
+# Environmental variables for frequently modified server settings
+ENV CSS_HOSTNAME ""
+ENV RCON_PASSWORD ""
+ENV STEAM_GROUP_ID ""
+ENV STEAM_API_KEY ""
