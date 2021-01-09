@@ -6,6 +6,7 @@ Run ``docker pull ghcr.io/lanofdoom/counterstrikesource-server/counterstrikesour
 
 # Installed Addons
 *  LAN of DOOM Authenticate by Steam Group
+*  LAN of DOOM Map Settings
 *  LAN of DOOM Max Cash
 *  MetaMod:Source
 *  SourceMod
