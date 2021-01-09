@@ -14,7 +14,7 @@ RUN  dpkg --add-architecture i386 && apt-get update && export DEBIAN_FRONTEND=no
    lib32gcc1 \
    libc6 \
    libcurl4:i386 \
-   libncurses6:i386 \
+   libncurses5:i386 \
    unzip \
    && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 
