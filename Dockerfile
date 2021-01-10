@@ -1,4 +1,4 @@
-FROM ubuntu:focal
+FROM ubuntu:focal as steam-install-cstrike
 
 # Download and install steamcmd and srcds
 RUN dpkg --add-architecture i386 && apt-get update && export DEBIAN_FRONTEND=noninteractive \
@@ -47,13 +47,29 @@ RUN cd /opt/game/cstrike/addons/sourcemod/plugins \
 RUN ls /opt/game/cstrike/maps/*.bsp | grep -v test | sed -e 's/.*\/\([^\/]*\).bsp/\1/' > /opt/game/cstrike/cfg/mapcycle.txt
 COPY rtv.cfg /opt/game/cstrike/cfg/sourcemod
 COPY server.cfg /opt/game/cstrike/cfg
-
-# Configure entrypoint
 COPY entrypoint.sh /opt/game/entrypoint.sh
-ENTRYPOINT /opt/game/entrypoint.sh
+
+# Create Final Image
+FROM ubuntu:focal
+
+RUN dpkg --add-architecture i386 && apt-get update && export DEBIAN_FRONTEND=noninteractive \
+ && apt-get install --no-install-recommends -y -o APT::Immediate-Configure=0 \
+    ca-certificates \
+    curl \
+    lib32gcc1 \
+    libc6 \
+    libcurl4:i386 \
+    libncurses5:i386 \
+    unzip \
+ && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
+
+USER nobody
+COPY --chown=nobody:root --from=steam-install-cstrike /opt/game /opt/game
+
+CMD /opt/game/entrypoint.sh
 
 # Environmental variables for frequently modified server settings
-ENV CSS_HOSTNAME ""
-ENV RCON_PASSWORD ""
-ENV STEAM_GROUP_ID ""
-ENV STEAM_API_KEY ""
+ENV CSS_HOSTNAME "" \
+    RCON_PASSWORD "" \
+    STEAM_GROUP_ID "" \
+    STEAM_API_KEY ""
