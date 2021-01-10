@@ -18,6 +18,25 @@ RUN mkdir -p /opt/steam \
 
 RUN /opt/steam/steamcmd.sh +login anonymous +force_install_dir /opt/game +app_update 232330 validate +quit || true
 
+
+# Create Final Image
+FROM ubuntu:focal
+
+RUN dpkg --add-architecture i386 && apt-get update && export DEBIAN_FRONTEND=noninteractive \
+ && apt-get install --no-install-recommends -y -o APT::Immediate-Configure=0 \
+    ca-certificates \
+    curl \
+    lib32gcc1 \
+    libc6 \
+    libcurl4:i386 \
+    libncurses5:i386 \
+    xz-utils \
+    unzip \
+ && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
+
+USER nobody
+COPY --chown=nobody:root --from=steam-install-cstrike /opt/game /opt/game
+
 # Download plugins and maps
 RUN cd /opt/game/cstrike \
  && curl -sLo- "https://lanofdoom.github.io/counterstrikesource-maps/releases/v2.0.0/maps.tar.xz" | tar Jxvf - \
@@ -49,24 +68,7 @@ COPY rtv.cfg /opt/game/cstrike/cfg/sourcemod
 COPY server.cfg /opt/game/cstrike/cfg
 COPY entrypoint.sh /opt/game/entrypoint.sh
 
-# Create Final Image
-FROM ubuntu:focal
-
-RUN dpkg --add-architecture i386 && apt-get update && export DEBIAN_FRONTEND=noninteractive \
- && apt-get install --no-install-recommends -y -o APT::Immediate-Configure=0 \
-    ca-certificates \
-    curl \
-    lib32gcc1 \
-    libc6 \
-    libcurl4:i386 \
-    libncurses5:i386 \
-    unzip \
- && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
-
-USER nobody
-COPY --chown=nobody:root --from=steam-install-cstrike /opt/game /opt/game
-
-CMD /opt/game/entrypoint.sh
+ENTRYPOINT /opt/game/entrypoint.sh
 
 # Environmental variables for frequently modified server settings
 ENV CSS_ADMIN="" \
