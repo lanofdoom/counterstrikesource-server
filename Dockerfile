@@ -69,7 +69,9 @@ COPY --chown=nobody:root --from=steam-install-cstrike /opt/game /opt/game
 CMD /opt/game/entrypoint.sh
 
 # Environmental variables for frequently modified server settings
-ENV CSS_HOSTNAME="" \
+ENV CSS_ADMIN="" \
+    CSS_HOSTNAME="" \
+    CSS_MOTD="" \
     RCON_PASSWORD="" \
     STEAM_GROUP_ID="" \
     STEAM_API_KEY=""
