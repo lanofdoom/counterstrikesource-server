@@ -27,7 +27,7 @@ RUN cd /opt/game/cstrike \
  && curl -sL "https://lanofdoom.github.io/counterstrikesource-max-cash/releases/v1.0.0/max_cash.smx" -o /opt/game/cstrike/addons/sourcemod/plugins/max_cash.smx
 
 # Create bz2 version of map data
-RUN RUN cd /opt/game/cstrike && ./make_bz2_files.sh
+RUN cd /opt/game/cstrike && ./make_bz2_files.sh
 
 # Enable Metamod (required for SourceMod)
 COPY metamod.vdf metamod_x64.vdf /opt/game/cstrike/addons/
