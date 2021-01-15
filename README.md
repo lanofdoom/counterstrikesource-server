@@ -14,6 +14,8 @@ Run ``docker pull ghcr.io/lanofdoom/counterstrikesource-server/counterstrikesour
 # Environmental Variables
 ``CSS_HOSTNAME`` The name of the server as listed in Valve's server browser.
 
+``CSS_PASSWORD`` The password users must enter in order to join the server.
+
 ``RCON_PASSWORD`` The rcon password for the server.
 
 ``STEAM_GROUP_ID`` The Steam group to use for the allowlist of users joining the server.
