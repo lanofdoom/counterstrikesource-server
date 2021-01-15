@@ -48,6 +48,7 @@ ENTRYPOINT /opt/game/entrypoint.sh
 ENV CSS_ADMIN="" \
     CSS_HOSTNAME="" \
     CSS_MOTD="" \
+    CSS_PASSWORD="" \
     RCON_PASSWORD="" \
     STEAM_GROUP_ID="" \
     STEAM_API_KEY=""
