@@ -4,7 +4,7 @@
 
 [ -z "${CSS_MOTD}" ] || echo "${CSS_MOTD}" > /opt/game/cstrike/motd.txt
 
-LD_LIBRARY_PATH="/opt/game:/opt/game/bin:${LD_LIBRARY_PATH:-}" /opt/game/srcds_linux \
+/opt/game/srcds_run \
     -game cstrike \
     -tickrate 100 \
     -strictbindport \
