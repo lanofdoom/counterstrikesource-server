@@ -2,16 +2,12 @@ name: Docker
 
 on:
   push:
-    # Publish `master` as Docker `latest` image.
     branches:
       - master
 
-    # Publish `v1.2.3` tags as releases.
-    tags:
-      - v1.0.0
-
-  # Run tests for any PRs.
-  pull_request:
+  # Run every day 2 AM
+  schedule:
+    - cron:  '* 2 * * *'
 
 env:
   IMAGE_NAME: counterstrikesource-server
@@ -50,5 +46,28 @@ jobs:
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION
 
+          docker inspect --format='{{.Created}}' ghcr.io/lanofdoom/counterstrikesource-base/counterstrikesource-base:latest > counterstrikesource-base.ver
+          docker run --entrypoint=/bin/dpkg $IMAGE_NAME -l > packages.ver
+          docker run --entrypoint=/bin/find $IMAGE_NAME /opt/game -type f -exec sha256sum {} \; > cstrike.ver
+
+          if cmp -s packages.ver deps/packages.ver \
+             && cmp -s counterstrikesource-base.ver deps/counterstrikesource-base.ver \
+             && cmp -s cstrike.ver deps/cstrike.ver ; \
+          then exit ; \
+          fi
+
+          mkdir -p deps
+          cp packages.ver deps/packages.ver
+          cp counterstrikesource-base.ver deps/counterstrikesource-base.ver
+          cp cstrike.ver deps/cstrike.ver
+
           docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
           docker push $IMAGE_ID:$VERSION
+
+      - name: Update dependency versions
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: main
+          FOLDER: deps
+          TARGET_FOLDER: deps
