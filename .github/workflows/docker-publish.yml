@@ -59,6 +59,7 @@ jobs:
           fi
 
           mkdir -p deps
+          cp dockerfile.ver deps/dockerfile.ver
           cp packages.ver deps/packages.ver
           cp counterstrikesource-base.ver deps/counterstrikesource-base.ver
           cp cstrike.ver deps/cstrike.ver
