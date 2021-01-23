@@ -1,13 +1,14 @@
-FROM ghcr.io/lanofdoom/counterstrikesource-base/counterstrikesource-base:latest
+FROM ubuntu:focal as pluginsandmaps
 
-# Install plugins, maps, and runtime dependencies
-RUN dpkg --add-architecture i386 \
-    && apt-get update \
+# Configure plugins and maps as a separate stage
+RUN apt-get update \
     && apt-get install -y -o APT::Immediate-Configure=0 --no-install-recommends --no-install-suggests \
-        ca-certificates:i386 \
-        curl:i386 \
-        libcurl4:i386 \
+        ca-certificates \
+        curl \
         xz-utils \
+    && mkdir -p /opt/game/cstrike/addons \
+    && mkdir -p /opt/game/cstrike/cfg \
+    && mkdir -p /opt/game/cstrike/maps \
     && cd /opt/game/cstrike \
     && curl -sLo- "https://lanofdoom.github.io/counterstrikesource-maps/releases/v2.0.0/maps.tar.xz" | tar Jxvf - \
     && curl -sLo- "https://mms.alliedmods.net/mmsdrop/1.11/mmsource-1.11.0-git1143-linux.tar.gz" | tar zxvf - \
@@ -26,13 +27,28 @@ RUN dpkg --add-architecture i386 \
     && mv disabled/mapchooser.smx mapchooser.smx \
     && mv disabled/rockthevote.smx rockthevote.smx \
     && mv disabled/nominations.smx nominations.smx \
-    && chown -R nobody /opt/game \
     && apt-get remove -y \
-        curl:i386 \
+        ca-certificates \
+        curl \
         xz-utils \
     && apt-get clean autoclean \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/*
+
+FROM ghcr.io/lanofdoom/counterstrikesource-base/counterstrikesource-base:latest
+
+# Install runtime dependencies
+RUN dpkg --add-architecture i386 \
+    && apt-get update \
+    && apt-get install -y -o APT::Immediate-Configure=0 --no-install-recommends --no-install-suggests \
+        ca-certificates:i386 \
+        libcurl4:i386 \
+    && apt-get clean autoclean \
+    && apt-get autoremove -y \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy in plugins and maps
+COPY --chown=nobody:root --from=pluginsandmaps /opt/game /opt/game
 
 # Switch user to nobody
 USER nobody
