@@ -58,10 +58,10 @@ jobs:
           fi
 
           mkdir -p deps
-          cp dockerfile.ver deps/dockerfile.ver
-          cp packages.ver deps/packages.ver
-          cp counterstrikesource-base.ver deps/counterstrikesource-base.ver
-          cp cstrike.ver deps/cstrike.ver
+          mv -f dockerfile.ver deps/dockerfile.ver
+          mv -f packages.ver deps/packages.ver
+          mv -f counterstrikesource-base.ver deps/counterstrikesource-base.ver
+          mv -f cstrike.ver deps/cstrike.ver
 
           docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
           docker push $IMAGE_ID:$VERSION
