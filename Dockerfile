@@ -13,7 +13,7 @@ RUN apt-get update \
     && curl -sLo- "https://lanofdoom.github.io/counterstrikesource-maps/releases/v2.0.0/maps.tar.xz" | tar Jxvf - \
     && curl -sLo- "https://mms.alliedmods.net/mmsdrop/1.11/mmsource-1.11.0-git1143-linux.tar.gz" | tar zxvf - \
     && curl -sLo- "https://sm.alliedmods.net/smdrop/1.10/sourcemod-1.10.0-git6502-linux.tar.gz" | tar zxvf - \
-    && curl -SLo- "https://lanofdoom.github.io/auth-by-steam-group/releases/v1.0.1/auth_by_steam_group.tar.gz" | tar zxvf - \
+    && curl -SLo- "https://lanofdoom.github.io/auth-by-steam-group/releases/v1.1.0/auth_by_steam_group.tar.gz" | tar zxvf - \
     && curl -sL "https://lanofdoom.github.io/counterstrikesource-map-settings/releases/v1.1.0/lan_of_doom_map_settings.smx" -o /opt/game/cstrike/addons/sourcemod/plugins/lan_of_doom_map_settings.smx \
     && curl -sL "https://lanofdoom.github.io/counterstrikesource-max-cash/releases/v1.0.0/max_cash.smx" -o /opt/game/cstrike/addons/sourcemod/plugins/max_cash.smx \
     && ./make_bz2_files.sh \
