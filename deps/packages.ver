@@ -4,7 +4,7 @@ Desired=Unknown/Install/Remove/Purge/Hold
 ||/ Name                      Version                           Architecture Description
 +++-=========================-=================================-============-========================================================================
 ii  adduser                   3.118ubuntu2                      all          add and remove users and groups
-ii  apt                       2.0.2ubuntu0.1                    amd64        commandline package manager
+ii  apt                       2.0.2ubuntu0.2                    amd64        commandline package manager
 ii  base-files                11ubuntu5.2                       amd64        Debian base system miscellaneous files
 ii  base-passwd               3.5.47                            amd64        Debian base system master password and group files
 ii  bash                      5.0-6ubuntu1.1                    amd64        GNU Bourne Again SHell
@@ -30,7 +30,7 @@ ii  init-system-helpers       1.57                              all          hel
 ii  lib32gcc-s1               10.2.0-5ubuntu1~20.04             amd64        GCC support library (32 bit Version)
 ii  lib32gcc1                 1:10.2.0-5ubuntu1~20.04           amd64        GCC support library (dependency package, 32bit)
 ii  libacl1:amd64             2.2.53-6                          amd64        access control list - shared library
-ii  libapt-pkg6.0:amd64       2.0.2ubuntu0.1                    amd64        package management runtime library
+ii  libapt-pkg6.0:amd64       2.0.2ubuntu0.2                    amd64        package management runtime library
 ii  libasn1-8-heimdal:i386    7.7.0+dfsg-1ubuntu1               i386         Heimdal Kerberos - ASN.1 library
 ii  libattr1:amd64            1:2.4.48-5                        amd64        extended attribute handling - shared library
 ii  libaudit-common           1:2.8.5-2ubuntu6                  all          Dynamic library for security auditing - common files
@@ -114,11 +114,11 @@ ii  libssh-4:i386             0.9.3-2ubuntu2.1                  i386         tin
 ii  libssl1.1:amd64           1.1.1f-1ubuntu2.1                 amd64        Secure Sockets Layer toolkit - shared libraries
 ii  libssl1.1:i386            1.1.1f-1ubuntu2.1                 i386         Secure Sockets Layer toolkit - shared libraries
 ii  libstdc++6:amd64          10.2.0-5ubuntu1~20.04             amd64        GNU Standard C++ Library v3
-ii  libsystemd0:amd64         245.4-4ubuntu3.3                  amd64        systemd utility library
+ii  libsystemd0:amd64         245.4-4ubuntu3.4                  amd64        systemd utility library
 ii  libtasn1-6:amd64          4.16.0-2                          amd64        Manage ASN.1 structures (runtime)
 ii  libtasn1-6:i386           4.16.0-2                          i386         Manage ASN.1 structures (runtime)
 ii  libtinfo6:amd64           6.2-0ubuntu2                      amd64        shared low-level terminfo library for terminal handling
-ii  libudev1:amd64            245.4-4ubuntu3.3                  amd64        libudev shared library
+ii  libudev1:amd64            245.4-4ubuntu3.4                  amd64        libudev shared library
 ii  libunistring2:amd64       0.9.10-2                          amd64        Unicode string library for C
 ii  libunistring2:i386        0.9.10-2                          i386         Unicode string library for C
 ii  libuuid1:amd64            2.34-0.1ubuntu9.1                 amd64        Universally Unique ID library
@@ -138,7 +138,7 @@ ii  procps                    2:3.3.16-1ubuntu2                 amd64        /pr
 ii  sed                       4.7-1                             amd64        GNU stream editor for filtering/transforming text
 ii  sensible-utils            0.0.12+nmu1                       all          Utilities for sensible alternative selection
 ii  sysvinit-utils            2.96-2.1ubuntu1                   amd64        System-V-like utilities
-ii  tar                       1.30+dfsg-7                       amd64        GNU version of the tar archiving utility
+ii  tar                       1.30+dfsg-7ubuntu0.20.04.1        amd64        GNU version of the tar archiving utility
 ii  ubuntu-keyring            2020.02.11.2                      all          GnuPG keys of the Ubuntu archive
 ii  util-linux                2.34-0.1ubuntu9.1                 amd64        miscellaneous system utilities
 ii  zlib1g:amd64              1:1.2.11.dfsg-2ubuntu1.2          amd64        compression library - runtime
