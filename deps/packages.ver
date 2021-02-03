@@ -10,7 +10,7 @@ ii  base-passwd               3.5.47                            amd64        Deb
 ii  bash                      5.0-6ubuntu1.1                    amd64        GNU Bourne Again SHell
 ii  bsdutils                  1:2.34-0.1ubuntu9.1               amd64        basic utilities from 4.4BSD-Lite
 ii  bzip2                     1.0.8-2                           amd64        high-quality block-sorting file compressor - utilities
-ii  ca-certificates           20201027ubuntu0.20.04.1           all          Common CA certificates
+ii  ca-certificates           20210119~20.04.1                  all          Common CA certificates
 ii  coreutils                 8.30-3ubuntu2                     amd64        GNU core utilities
 ii  dash                      0.5.10.2-6                        amd64        POSIX-compliant shell
 ii  debconf                   1.5.73                            all          Debian configuration management system
