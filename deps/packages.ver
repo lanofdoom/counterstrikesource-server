@@ -4,8 +4,8 @@ Desired=Unknown/Install/Remove/Purge/Hold
 ||/ Name                      Version                           Architecture Description
 +++-=========================-=================================-============-========================================================================
 ii  adduser                   3.118ubuntu2                      all          add and remove users and groups
-ii  apt                       2.0.2ubuntu0.2                    amd64        commandline package manager
-ii  base-files                11ubuntu5.2                       amd64        Debian base system miscellaneous files
+ii  apt                       2.0.4                             amd64        commandline package manager
+ii  base-files                11ubuntu5.3                       amd64        Debian base system miscellaneous files
 ii  base-passwd               3.5.47                            amd64        Debian base system master password and group files
 ii  bash                      5.0-6ubuntu1.1                    amd64        GNU Bourne Again SHell
 ii  bsdutils                  1:2.34-0.1ubuntu9.1               amd64        basic utilities from 4.4BSD-Lite
@@ -22,7 +22,7 @@ ii  fdisk                     2.34-0.1ubuntu9.1                 amd64        col
 ii  findutils                 4.7.0-1ubuntu1                    amd64        utilities for finding files--find, xargs
 ii  gcc-10-base:amd64         10.2.0-5ubuntu1~20.04             amd64        GCC, the GNU Compiler Collection (base package)
 ii  gcc-10-base:i386          10.2.0-5ubuntu1~20.04             i386         GCC, the GNU Compiler Collection (base package)
-ii  gpgv                      2.2.19-3ubuntu2                   amd64        GNU privacy guard - signature verification tool
+ii  gpgv                      2.2.19-3ubuntu2.1                 amd64        GNU privacy guard - signature verification tool
 ii  grep                      3.4-1                             amd64        GNU grep, egrep and fgrep
 ii  gzip                      1.10-0ubuntu4                     amd64        GNU compression utilities
 ii  hostname                  3.23                              amd64        utility to set/show the host name or domain name
@@ -30,7 +30,7 @@ ii  init-system-helpers       1.57                              all          hel
 ii  lib32gcc-s1               10.2.0-5ubuntu1~20.04             amd64        GCC support library (32 bit Version)
 ii  lib32gcc1                 1:10.2.0-5ubuntu1~20.04           amd64        GCC support library (dependency package, 32bit)
 ii  libacl1:amd64             2.2.53-6                          amd64        access control list - shared library
-ii  libapt-pkg6.0:amd64       2.0.2ubuntu0.2                    amd64        package management runtime library
+ii  libapt-pkg6.0:amd64       2.0.4                             amd64        package management runtime library
 ii  libasn1-8-heimdal:i386    7.7.0+dfsg-1ubuntu1               i386         Heimdal Kerberos - ASN.1 library
 ii  libattr1:amd64            1:2.4.48-5                        amd64        extended attribute handling - shared library
 ii  libaudit-common           1:2.8.5-2ubuntu6                  all          Dynamic library for security auditing - common files
@@ -38,7 +38,7 @@ ii  libaudit1:amd64           1:2.8.5-2ubuntu6                  amd64        Dyn
 ii  libblkid1:amd64           2.34-0.1ubuntu9.1                 amd64        block device ID library
 ii  libbrotli1:i386           1.0.7-6ubuntu0.1                  i386         library implementing brotli encoder and decoder (shared libraries)
 ii  libbz2-1.0:amd64          1.0.8-2                           amd64        high-quality block-sorting file compressor library - runtime
-ii  libc-bin                  2.31-0ubuntu9.1                   amd64        GNU C Library: Binaries
+ii  libc-bin                  2.31-0ubuntu9.2                   amd64        GNU C Library: Binaries
 ii  libc6:amd64               2.31-0ubuntu9.2                   amd64        GNU C Library: Shared libraries
 ii  libc6:i386                2.31-0ubuntu9.2                   i386         GNU C Library: Shared libraries
 ii  libc6-i386                2.31-0ubuntu9.2                   amd64        GNU C Library: 32-bit shared libraries for AMD64
