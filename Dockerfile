@@ -34,8 +34,8 @@ RUN cd /opt/game/cstrike \
 # Install LAN of DOOM Plugins
 RUN cd /opt/game/cstrike \
     && curl -SLo- "https://lanofdoom.github.io/auth-by-steam-group/releases/v2.1.0/auth_by_steam_group.tar.gz" | tar zxvf - \
-    && curl -sL "https://lanofdoom.github.io/counterstrikesource-map-settings/releases/v1.1.0/lan_of_doom_map_settings.smx" -o /opt/game/cstrike/addons/sourcemod/plugins/lan_of_doom_map_settings.smx \
-    && curl -sL "https://lanofdoom.github.io/counterstrikesource-max-cash/releases/v1.0.0/max_cash.smx" -o /opt/game/cstrike/addons/sourcemod/plugins/max_cash.smx
+    && curl -sLo- "https://lanofdoom.github.io/counterstrikesource-map-settings/releases/v1.1.1/lan_of_doom_map_settings.tar.gz" | tar zxvf - \
+    && curl -sLo- "https://lanofdoom.github.io/counterstrikesource-max-cash/releases/v1.0.1/max_cash.tar.gz" | tar zxvf -
 
 # Set server configuration options
 COPY rtv.cfg /opt/game/cstrike/cfg/sourcemod
