@@ -4,9 +4,11 @@
 
 [ -z "${CSS_MOTD}" ] || echo "${CSS_MOTD}" > /opt/game/cstrike/motd.txt
 
-# Touch these files to workaround an issue in sourcemod
+# Generate mapcycle here to cut down on image build time and space usage.
+ls /opt/game/cstrike/maps/*.bsp | grep -v test | sed -e 's/.*\/\([^\/]*\).bsp/\1/' > /opt/game/cstrike/cfg/mapcycle.txt
+
+# Touch this file to workaround an issue in sourcemod
 touch /opt/game/cstrike/addons/sourcemod/configs/maplists.cfg
-touch /opt/game/cstrike/cfg/maplist.txt
 
 /opt/game/srcds_run \
     -game cstrike \

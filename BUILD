@@ -85,16 +85,10 @@ container_layer(
 # Build Image With i386 Enabled
 #
 
-container_image(
-    name = "server_with_no_entrypoint",
-    base = "@server_base//image",
-    user = "root",
-    entrypoint = [],
-)
-
 container_run_and_extract(
-    name = "enabled_i386_sources",
-    image = "server_with_no_entrypoint.tar",
+    name = "enable_i386_sources",
+    docker_run_flags = ["--entrypoint=''", "--user='root'"],
+    image = "@server_base//image",
     extract_file = "/var/lib/dpkg/arch",
     commands = [
         "dpkg --add-architecture i386",
@@ -109,28 +103,7 @@ container_image(
     compression = "gzip",
     directory = "/var/lib/dpkg",
     files = [
-        ":enabled_i386_sources/var/lib/dpkg/arch",
-    ],
-)
-
-#
-# Generate Mapcycle
-#
-
-container_image(
-    name = "server_with_maps",
-    base = ":server_with_i386_packages",
-    layers = [
-        ":maps_layer",
-    ],
-)
-
-container_run_and_extract(
-    name = "generate_mapcycle",
-    image = ":server_with_maps.tar",
-    extract_file = "/mapcycle.txt",
-    commands = [
-        "ls /opt/game/cstrike/maps/*.bsp | grep -v test | sed -e 's/.*\\/\\([^\\/]*\\).bsp/\\1/' > /mapcycle.txt",
+        ":enable_i386_sources/var/lib/dpkg/arch",
     ],
 )
 
@@ -144,7 +117,6 @@ container_layer(
     directory = "/opt/game/cstrike/cfg",
     files = [
         ":server.cfg",
-        ":generate_mapcycle/mapcycle.txt",
     ],
 )
 
