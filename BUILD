@@ -32,7 +32,6 @@ container_run_and_extract(
 
 container_layer(
     name = "maps_layer",
-    compression = "gzip",
     directory = "/opt/game/cstrike",
     tars = [
         ":extract_maps/maps.tar",
@@ -74,7 +73,6 @@ container_run_and_extract(
 
 container_layer(
     name = "sourcemod_layer",
-    compression = "gzip",
     directory = "/opt/game/cstrike",
     tars = [
         ":configure_sourcemod/sourcemod.tar",
@@ -87,8 +85,7 @@ container_layer(
 
 container_run_and_extract(
     name = "enable_i386_sources",
-    docker_run_flags = ["--entrypoint=''", "--user='root'"],
-    image = "@server_base//image",
+    image = "@counterstrikesource-base//:server_base.tar",
     extract_file = "/var/lib/dpkg/arch",
     commands = [
         "dpkg --add-architecture i386",
@@ -97,10 +94,7 @@ container_run_and_extract(
 
 container_image(
     name = "server_with_i386_packages",
-    base = "@server_base//image",
-    user = "root",
-    entrypoint = [],
-    compression = "gzip",
+    base = "@counterstrikesource-base//:server_base.tar",
     directory = "/var/lib/dpkg",
     files = [
         ":enable_i386_sources/var/lib/dpkg/arch",
@@ -113,7 +107,6 @@ container_image(
 
 container_layer(
     name = "lanofdoom_server_config",
-    compression = "gzip",
     directory = "/opt/game/cstrike/cfg",
     files = [
         ":server.cfg",
@@ -122,7 +115,6 @@ container_layer(
 
 container_layer(
     name = "lanofdoom_server_entrypoint",
-    compression = "gzip",
     directory = "/opt/game",
     files = [
         ":entrypoint.sh",
@@ -131,7 +123,6 @@ container_layer(
 
 container_layer(
     name = "lanofdoom_server_plugins",
-    compression = "gzip",
     directory = "/opt/game/cstrike",
     tars = [
         "@auth_by_steam_group//file",
@@ -162,7 +153,6 @@ container_run_and_extract(
 
 container_layer(
     name = "lanofdoom_layer",
-    compression = "gzip",
     tars = [
         ":configure_lanofdoom_layer/lanofdoom.tar",
     ],
@@ -191,7 +181,6 @@ install_pkgs(
 
 container_image(
     name = "server_image",
-    compression = "gzip",
     user = "nobody",
     entrypoint = ["/opt/game/entrypoint.sh"],
     env = {
@@ -207,6 +196,9 @@ container_image(
         ":lanofdoom_layer",
         ":maps_layer",
         ":sourcemod_layer",
+    ],
+    tars = [
+        "@counterstrikesource-base//:counter_strike_source/tarball.tar.gz",
     ],
     base = ":server_with_plugin_deps_image",
 )

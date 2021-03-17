@@ -1,3 +1,4 @@
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive", "http_file")
 
 http_archive(
@@ -63,15 +64,21 @@ http_file(
 )
 
 container_pull(
+    name = "steamcmd_base",
+    registry = "ghcr.io",
+    repository = "lanofdoom/steamcmd/steamcmd",
+    tag = "latest",
+)
+
+container_pull(
     name = "ubuntu",
     registry = "index.docker.io",
     repository = "library/ubuntu",
     tag = "focal",
 )
 
-container_pull(
-    name = "server_base",
-    registry = "ghcr.io",
-    repository = "lanofdoom/counterstrikesource-base/counterstrikesource-base",
-    tag = "latest",
+git_repository(
+    name = "counterstrikesource-base",
+    remote = "https://github.com/lanofdoom/counterstrikesource-base",
+    branch = "main",
 )
