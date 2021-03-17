@@ -115,9 +115,16 @@ container_run_and_extract(
 # Build Final Image
 #
 
+container_image(
+    name = "server_base_with_no_entrypoint",
+    user = "root",
+    entrypoint = [],
+    base = "@server_base//image",
+)
+
 download_pkgs(
     name = "plugin_deps",
-    image_tar = "@counterstrikesource-base//:server_base.tar",
+    image_tar = ":server_base_with_no_entrypoint.tar",
     packages = [
         "ca-certificates:i386",
         "libcurl4:i386",
@@ -126,7 +133,7 @@ download_pkgs(
 
 install_pkgs(
     name = "server_with_plugin_deps_image",
-    image_tar = "@counterstrikesource-base//:server_base.tar",
+    image_tar = ":server_base_with_no_entrypoint.tar",
     installables_tar = ":plugin_deps.tar",
     installation_cleanup_commands = "rm -rf /var/lib/apt/lists/*",
     output_image_name = "server_with_plugin_deps_image",
@@ -149,7 +156,6 @@ container_image(
         ":lanofdoom/archive.tar.gz",
         ":maps/archive.tar.gz",
         ":sourcemod/archive.tar.gz",
-        "@counterstrikesource-base//:counter_strike_source/tarball.tar.gz",
     ],
     base = ":server_with_plugin_deps_image",
 )

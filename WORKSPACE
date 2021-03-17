@@ -64,21 +64,15 @@ http_file(
 )
 
 container_pull(
-    name = "steamcmd_base",
-    registry = "ghcr.io",
-    repository = "lanofdoom/steamcmd/steamcmd",
-    tag = "latest",
-)
-
-container_pull(
     name = "ubuntu",
     registry = "index.docker.io",
     repository = "library/ubuntu",
     tag = "focal",
 )
 
-git_repository(
-    name = "counterstrikesource-base",
-    remote = "https://github.com/lanofdoom/counterstrikesource-base",
-    branch = "main",
+container_pull(
+    name = "server_base",
+    registry = "ghcr.io",
+    repository = "lanofdoom/counterstrikesource-base/counterstrikesource-base",
+    digest = "sha256:db7f83e2a1466b3f2a08617884a620ea1f138321a2a71cc96701dffdf6d9d6ee",
 )
