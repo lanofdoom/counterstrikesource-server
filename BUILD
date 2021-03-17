@@ -9,7 +9,7 @@ load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_commit", 
 
 container_image(
     name = "maps_container",
-    directory = "/maps",
+    directory = "/opt/game/cstrike",
     tars = [
         "@maps//file",
     ],
@@ -17,25 +17,16 @@ container_image(
 )
 
 container_run_and_extract(
-    name = "extract_maps",
-    extract_file = "/maps.tar",
+    name = "maps",
+    extract_file = "/archive.tar.gz",
     commands = [
-        "cd maps",
-        "mkdir cfg",
+        "cd /opt/game/cstrike",
         "./make_bz2_files.sh",
         "rm *.sh *.md *license",
-        "chown -R nobody:root .",
-        "tar -cvf /maps.tar *",
+        "chown -R nobody:root /opt",
+        "tar -czvf /archive.tar.gz /opt",
     ],
     image = ":maps_container.tar",
-)
-
-container_layer(
-    name = "maps_layer",
-    directory = "/opt/game/cstrike",
-    tars = [
-        ":extract_maps/maps.tar",
-    ],
 )
 
 #
@@ -44,7 +35,7 @@ container_layer(
 
 container_image(
     name = "sourcemod_container",
-    directory = "/sourcemod",
+    directory = "/opt/game/cstrike",
     tars = [
         "@metamod//file",
         "@sourcemod//file",
@@ -53,10 +44,10 @@ container_image(
 )
 
 container_run_and_extract(
-    name = "configure_sourcemod",
-    extract_file = "/sourcemod.tar",
+    name = "sourcemod",
+    extract_file = "/archive.tar.gz",
     commands = [
-        "cd sourcemod/addons/sourcemod/plugins",
+        "cd /opt/game/cstrike/addons/sourcemod/plugins",
         "mv basevotes.smx disabled/basevotes.smx",
         "mv funcommands.smx disabled/funcommands.smx",
         "mv funvotes.smx disabled/funvotes.smx",
@@ -64,41 +55,10 @@ container_run_and_extract(
         "mv disabled/mapchooser.smx mapchooser.smx",
         "mv disabled/rockthevote.smx rockthevote.smx",
         "mv disabled/nominations.smx nominations.smx",
-        "cd /sourcemod",
-        "chown -R nobody:root .",
-        "tar -cvf /sourcemod.tar *",
+        "chown -R nobody:root /opt",
+        "tar -czvf /archive.tar.gz /opt",
     ],
     image = ":sourcemod_container.tar",
-)
-
-container_layer(
-    name = "sourcemod_layer",
-    directory = "/opt/game/cstrike",
-    tars = [
-        ":configure_sourcemod/sourcemod.tar",
-    ],
-)
-
-#
-# Build Image With i386 Enabled
-#
-
-container_run_and_extract(
-    name = "enable_i386_sources",
-    image = "@counterstrikesource-base//:server_base.tar",
-    extract_file = "/var/lib/dpkg/arch",
-    commands = [
-        "dpkg --add-architecture i386",
-    ],
-)
-
-container_image(
-    name = "server_with_i386_packages",
-    base = "@counterstrikesource-base//:server_base.tar",
-    directory = "/var/lib/dpkg",
-    files = [
-        ":enable_i386_sources/var/lib/dpkg/arch",
-    ],
 )
 
 #
@@ -142,20 +102,13 @@ container_image(
 )
 
 container_run_and_extract(
-    name = "configure_lanofdoom_layer",
-    extract_file = "/lanofdoom.tar",
+    name = "lanofdoom",
+    extract_file = "/archive.tar.gz",
     commands = [
         "chown -R nobody:root /opt",
-        "tar -cvf /lanofdoom.tar /opt",
+        "tar -czvf /archive.tar.gz /opt",
     ],
     image = ":config_container.tar",
-)
-
-container_layer(
-    name = "lanofdoom_layer",
-    tars = [
-        ":configure_lanofdoom_layer/lanofdoom.tar",
-    ],
 )
 
 #
@@ -164,7 +117,7 @@ container_layer(
 
 download_pkgs(
     name = "plugin_deps",
-    image_tar = ":server_with_i386_packages.tar",
+    image_tar = "@counterstrikesource-base//:server_base.tar",
     packages = [
         "ca-certificates:i386",
         "libcurl4:i386",
@@ -173,7 +126,7 @@ download_pkgs(
 
 install_pkgs(
     name = "server_with_plugin_deps_image",
-    image_tar = ":server_with_i386_packages.tar",
+    image_tar = "@counterstrikesource-base//:server_base.tar",
     installables_tar = ":plugin_deps.tar",
     installation_cleanup_commands = "rm -rf /var/lib/apt/lists/*",
     output_image_name = "server_with_plugin_deps_image",
@@ -192,12 +145,10 @@ container_image(
         "STEAM_GROUP_ID": "",
         "STEAM_API_KEY": "",
     },
-    layers = [
-        ":lanofdoom_layer",
-        ":maps_layer",
-        ":sourcemod_layer",
-    ],
     tars = [
+        ":lanofdoom/archive.tar.gz",
+        ":maps/archive.tar.gz",
+        ":sourcemod/archive.tar.gz",
         "@counterstrikesource-base//:counter_strike_source/tarball.tar.gz",
     ],
     base = ":server_with_plugin_deps_image",
