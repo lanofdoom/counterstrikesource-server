@@ -4,6 +4,10 @@
 
 [ -z "${CSS_MOTD}" ] || echo "${CSS_MOTD}" > /opt/game/cstrike/motd.txt
 
+# Touch these files to workaround an issue in sourcemod
+touch /opt/game/cstrike/addons/sourcemod/configs/maplists.cfg
+touch /opt/game/cstrike/cfg/maplist.txt
+
 /opt/game/srcds_run \
     -game cstrike \
     -strictbindport \
