@@ -73,6 +73,5 @@ container_pull(
 container_pull(
     name = "server_base",
     registry = "ghcr.io",
-    repository = "lanofdoom/counterstrikesource-base/counterstrikesource-base",
-    digest = "sha256:db7f83e2a1466b3f2a08617884a620ea1f138321a2a71cc96701dffdf6d9d6ee",
+    repository = "lanofdoom/counterstrikesource-base/counterstrikesource-base"
 )
