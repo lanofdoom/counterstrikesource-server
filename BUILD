@@ -116,30 +116,6 @@ container_run_and_extract(
 #
 
 container_image(
-    name = "server_base_with_no_entrypoint",
-    user = "root",
-    entrypoint = [],
-    base = "@server_base//image",
-)
-
-download_pkgs(
-    name = "plugin_deps",
-    image_tar = ":server_base_with_no_entrypoint.tar",
-    packages = [
-        "ca-certificates:i386",
-        "libcurl4:i386",
-    ],
-)
-
-install_pkgs(
-    name = "server_with_plugin_deps_image",
-    image_tar = ":server_base_with_no_entrypoint.tar",
-    installables_tar = ":plugin_deps.tar",
-    installation_cleanup_commands = "rm -rf /var/lib/apt/lists/*",
-    output_image_name = "server_with_plugin_deps_image",
-)
-
-container_image(
     name = "server_image",
     user = "nobody",
     entrypoint = ["/opt/game/entrypoint.sh"],
@@ -157,7 +133,7 @@ container_image(
         ":maps/archive.tar.gz",
         ":sourcemod/archive.tar.gz",
     ],
-    base = ":server_with_plugin_deps_image",
+    base = "@server_base//image",
 )
 
 container_push(
