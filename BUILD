@@ -1,120 +1,29 @@
 load("@io_bazel_rules_docker//container:container.bzl", "container_image", "container_layer", "container_push")
-load("@io_bazel_rules_docker//docker/package_managers:download_pkgs.bzl", "download_pkgs")
-load("@io_bazel_rules_docker//docker/package_managers:install_pkgs.bzl", "install_pkgs")
-load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_commit", "container_run_and_extract")
+load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_extract")
+load("@com_github_lanofdoom_steamcmd//:defs.bzl", "steam_depot_layer")
 
-#
-# Build Server Base Image
-#
-
-container_run_and_extract(
-    name = "enable_i386_sources",
-    commands = [
-        "dpkg --add-architecture i386",
-    ],
-    extract_file = "/var/lib/dpkg/arch",
-    image = "@container_base//image",
-)
-
-container_image(
-    name = "container_base_with_i386_packages",
-    base = "@container_base//image",
-    directory = "/var/lib/dpkg",
-    files = [
-        ":enable_i386_sources/var/lib/dpkg/arch",
-    ],
-)
-
-download_pkgs(
-    name = "server_deps",
-    image_tar = ":container_base_with_i386_packages.tar",
-    packages = [
-        "ca-certificates:i386",
-        "lib32gcc-s1",
-        "libcurl4:i386",
-    ],
-)
-
-install_pkgs(
+alias(
     name = "server_base",
-    image_tar = ":container_base_with_i386_packages.tar",
-    installables_tar = ":server_deps.tar",
-    installation_cleanup_commands = "rm -rf /var/lib/apt/lists/*",
-    output_image_name = "server_base",
+    actual = "@server_base_image//image:dockerfile_image.tar",
 )
 
 #
 # Build Counter-Strike: Source Layer
 #
 
-container_run_and_commit(
-    name = "prepare_steamcmd_repo",
-    commands = [
-        "sed -i -e's/ main/ main non-free/g' /etc/apt/sources.list",
-        "echo steam steam/question select 'I AGREE' | debconf-set-selections",
-        "echo steam steam/license note '' | debconf-set-selections",
-    ],
-    image = ":server_base.tar",
-)
-
-download_pkgs(
-    name = "steamcmd_deps",
-    image_tar = ":prepare_steamcmd_repo_commit.tar",
-    packages = [
-        "steamcmd:i386",
-    ],
-)
-
-install_pkgs(
-    name = "steamcmd_base",
-    image_tar = ":prepare_steamcmd_repo_commit.tar",
-    installables_tar = ":steamcmd_deps.tar",
-    installation_cleanup_commands = "rm -rf /var/lib/apt/lists/*",
-    output_image_name = "steamcmd_base",
-)
-
-container_run_and_extract(
-    name = "download_counter_strike_source",
-    commands = [
-        "/usr/games/steamcmd +login anonymous +force_install_dir /opt/game +app_update 232330 validate +quit",
-        "rm -rf /opt/game/steamapps",
-        "chown -R nobody:root /opt/game",
-        "tar -czvf /archive.tar.gz /opt/game/",
-    ],
-    extract_file = "/archive.tar.gz",
-    image = ":steamcmd_base.tar",
-)
-
-container_layer(
-    name = "counter_strike_source",
-    tars = [
-        ":download_counter_strike_source/archive.tar.gz",
-    ],
+steam_depot_layer(
+    name = "counterstrikesource",
+    app = "232330",
+    directory = "/opt/game",
 )
 
 #
 # Build Maps Layer
 #
 
-download_pkgs(
-    name = "map_deps",
-    image_tar = "@container_base//image",
-    packages = [
-        "bzip2",
-    ],
-)
-
-install_pkgs(
-    name = "maps_base",
-    image_tar = "@container_base//image",
-    installables_tar = ":map_deps.tar",
-    installation_cleanup_commands = "rm -rf /var/lib/apt/lists/*",
-    output_image_name = "maps_base",
-)
-
 container_image(
     name = "maps_container",
-    base = ":maps_base",
+    base = ":server_base",
     directory = "/opt/game/cstrike",
     tars = [
         "@maps//file",
@@ -124,6 +33,7 @@ container_image(
 container_run_and_extract(
     name = "build_maps",
     commands = [
+        "apt update && apt install bzip2",
         "cd /opt/game/cstrike",
         "./make_bz2_files.sh",
         "rm *.sh *.md *license",
@@ -147,7 +57,7 @@ container_layer(
 
 container_image(
     name = "sourcemod_container",
-    base = "@container_base//image",
+    base = ":server_base",
     directory = "/opt/game/cstrike",
     tars = [
         "@metamod//file",
@@ -158,14 +68,15 @@ container_image(
 container_run_and_extract(
     name = "build_sourcemod",
     commands = [
-        "cd /opt/game/cstrike/addons/sourcemod/plugins",
-        "mv basevotes.smx disabled/basevotes.smx",
-        "mv funcommands.smx disabled/funcommands.smx",
-        "mv funvotes.smx disabled/funvotes.smx",
-        "mv playercommands.smx disabled/playercommands.smx",
-        "mv disabled/mapchooser.smx mapchooser.smx",
-        "mv disabled/rockthevote.smx rockthevote.smx",
-        "mv disabled/nominations.smx nominations.smx",
+        "cd /opt/game/cstrike/addons/sourcemod",
+        "mv plugins/basevotes.smx plugins/disabled/basevotes.smx",
+        "mv plugins/funcommands.smx plugins/disabled/funcommands.smx",
+        "mv plugins/funvotes.smx plugins/disabled/funvotes.smx",
+        "mv plugins/playercommands.smx plugins/disabled/playercommands.smx",
+        "mv plugins/disabled/mapchooser.smx plugins/mapchooser.smx",
+        "mv plugins/disabled/rockthevote.smx plugins/rockthevote.smx",
+        "mv plugins/disabled/nominations.smx plugins/nominations.smx",
+        "sed -i /DisableAutoUpdate/s/no/yes/ configs/core.cfg",
         "chown -R nobody:root /opt",
         "tar -czvf /archive.tar.gz /opt",
     ],
@@ -214,7 +125,7 @@ container_layer(
 
 container_image(
     name = "config_container",
-    base = "@container_base//image",
+    base = ":server_base",
     layers = [
         ":lanofdoom_server_config",
         ":lanofdoom_server_entrypoint",
@@ -259,12 +170,15 @@ container_image(
         "STEAM_API_KEY": "",
     },
     layers = [
-        ":counter_strike_source",
+        ":counterstrikesource",
         ":maps",
         ":sourcemod",
-        ":lanofdoom",
+        ":lanofdoom_server_config",
+        ":lanofdoom_server_plugins",
+        ":lanofdoom_server_entrypoint",
     ],
-    user = "nobody",
+    symlinks = {"/root/.steam/sdk32/steamclient.so": "/opt/game/bin/steamclient.so"},
+    workdir = "/opt/game",
 )
 
 container_push(
