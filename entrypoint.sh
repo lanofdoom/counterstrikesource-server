@@ -10,7 +10,8 @@ ls /opt/game/cstrike/maps/*.bsp | grep -v test | sed -e 's/.*\/\([^\/]*\).bsp/\1
 # Touch this file to workaround an issue in sourcemod
 touch /opt/game/cstrike/addons/sourcemod/configs/maplists.cfg
 
-/opt/game/srcds_run \
+# Call srcds_linux instead of srcds_run to avoid restart logic
+LD_LIBRARY_PATH="/opt/game:/opt/game/bin:${LD_LIBRARY_PATH:-}" /opt/game/srcds_linux \
     -game cstrike \
     -port "$CSS_PORT" \
     -strictbindport \
