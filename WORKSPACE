@@ -50,17 +50,24 @@ http_file(
 )
 
 http_file(
+    name = "gungame",
+    downloaded_file_path = "lan_of_doom_gungame.tar.gz",
+    sha256 = "4a41c7fc3d8e7d52bd880fd5b1def20ca1bc08dce003730cc4f246aefdc8847b",
+    urls = ["https://lanofdoom.github.io/counterstrike-gungame/releases/v1.0.0/lan_of_doom_gungame.tar.gz"],
+)
+
+http_file(
     name = "maps",
     downloaded_file_path = "maps.tar.xz",
-    sha256 = "00bafd77b190892fe55480976e51c6dc67507085488ca323dc418655b696826e",
-    urls = ["https://lanofdoom.github.io/counterstrikesource-maps/releases/v2.0.0/maps.tar.xz"],
+    sha256 = "1e286084fde290fdfb6b5e73386d5d443f815b181753fd98631afd69dcfa8bda",
+    urls = ["https://lanofdoom.github.io/counterstrikesource-maps/releases/v3.0.0/maps.tar.xz"],
 )
 
 http_file(
     name = "map_settings",
     downloaded_file_path = "map_settings.tar.gz",
-    sha256 = "783768b9a0f71fd9a1f7f50d10aceae4814c00714595f7d7c0a46a48d05338d4",
-    urls = ["https://lanofdoom.github.io/counterstrikesource-map-settings/releases/v1.1.1/lan_of_doom_map_settings.tar.gz"],
+    sha256 = "b205d457a36d24c44c7f87c9c9d63b9812c9a156e837c675ee55fab09b79a472",
+    urls = ["https://lanofdoom.github.io/counterstrikesource-map-settings/releases/v1.2.0/lan_of_doom_map_settings.tar.gz"],
 )
 
 http_file(
