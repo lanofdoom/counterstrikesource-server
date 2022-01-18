@@ -38,8 +38,8 @@ container_pull(
 http_file(
     name = "auth_by_steam_group",
     downloaded_file_path = "auth_by_steam_group.tar.gz",
-    sha256 = "563b4f508373494ab3b26acccc9c9fcbd11b168ed85b7ee7447a5603627350a9",
-    urls = ["https://lanofdoom.github.io/auth-by-steam-group/releases/v2.1.2/auth_by_steam_group.tar.gz"],
+    sha256 = "34c8c51ca45a59ce18ca2c9c9a7471d03dc173ec9bdb78b4ee99edb08995317a",
+    urls = ["https://lanofdoom.github.io/auth-by-steam-group/releases/v2.1.3/auth_by_steam_group.tar.gz"],
 )
 
 http_file(
