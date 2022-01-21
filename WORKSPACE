@@ -59,8 +59,8 @@ http_file(
 http_file(
     name = "maps",
     downloaded_file_path = "maps.tar.xz",
-    sha256 = "1e286084fde290fdfb6b5e73386d5d443f815b181753fd98631afd69dcfa8bda",
-    urls = ["https://lanofdoom.github.io/counterstrikesource-maps/releases/v3.0.0/maps.tar.xz"],
+    sha256 = "aca6ae5736e63c1b18b119216d75904cf71b7728af26f5f4e8729a0091ac40ad",
+    urls = ["https://lanofdoom.github.io/counterstrikesource-maps/releases/v4.0.0/maps.tar.xz"],
 )
 
 http_file(
