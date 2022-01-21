@@ -52,8 +52,8 @@ http_file(
 http_file(
     name = "gungame",
     downloaded_file_path = "lan_of_doom_gungame.tar.gz",
-    sha256 = "4a41c7fc3d8e7d52bd880fd5b1def20ca1bc08dce003730cc4f246aefdc8847b",
-    urls = ["https://lanofdoom.github.io/counterstrike-gungame/releases/v1.0.0/lan_of_doom_gungame.tar.gz"],
+    sha256 = "c8b5dd25f839fcc991a12c1c3957f6632589ad088bc1a25fcaf329edd4c24fa1",
+    urls = ["https://lanofdoom.github.io/counterstrike-gungame/releases/v1.0.1/lan_of_doom_gungame.tar.gz"],
 )
 
 http_file(
