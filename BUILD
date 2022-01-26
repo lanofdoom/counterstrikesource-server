@@ -76,7 +76,6 @@ container_run_and_extract(
         "mv plugins/disabled/mapchooser.smx plugins/mapchooser.smx",
         "mv plugins/disabled/rockthevote.smx plugins/rockthevote.smx",
         "mv plugins/disabled/nominations.smx plugins/nominations.smx",
-        "sed -i /DisableAutoUpdate/s/no/yes/ configs/core.cfg",
         "chown -R nobody:root /opt",
         "tar -czvf /archive.tar.gz /opt",
     ],
