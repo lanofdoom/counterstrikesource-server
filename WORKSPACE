@@ -18,6 +18,8 @@ load("@io_bazel_rules_docker//repositories:deps.bzl", container_deps = "deps")
 
 container_deps()
 
+load("@io_bazel_rules_docker//container:container.bzl", "container_pull")
+
 #
 # Steam Dependencies
 #
@@ -105,9 +107,9 @@ http_file(
 # Container Base Image
 #
 
-load("@io_bazel_rules_docker//contrib:dockerfile_build.bzl", "dockerfile_image")
-
-dockerfile_image(
-    name = "server_base_image",
-    dockerfile = "//:base.Dockerfile",
+container_pull(
+    name = "base_image",
+    registry = "index.docker.io",
+    repository = "library/debian",
+    tag = "bullseye-slim",
 )
