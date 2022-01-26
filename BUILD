@@ -1,10 +1,16 @@
 load("@io_bazel_rules_docker//container:container.bzl", "container_image", "container_layer", "container_push")
-load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_extract")
+load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_commit", "container_run_and_extract")
 load("@com_github_lanofdoom_steamcmd//:defs.bzl", "steam_depot_layer")
 
-alias(
+container_run_and_commit(
     name = "server_base",
-    actual = "@server_base_image//image:dockerfile_image.tar",
+    image = "@base_image//image",
+    commands = [
+        "dpkg --add-architecture i386",
+        "apt-get update",
+        "apt-get install -y ca-certificates lib32gcc-s1 libcurl4:i386 libsdl2-2.0-0:i386",
+        "rm -rf /var/lib/apt/lists/*",
+    ],
 )
 
 #
