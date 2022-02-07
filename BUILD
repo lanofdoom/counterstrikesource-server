@@ -121,10 +121,17 @@ container_layer(
     directory = "/opt/game/cstrike",
     tars = [
         "@auth_by_steam_group//file",
-        "@deathmatch//file",
+        "@disable_buyzones//file",
+        "@disable_radar//file",
+        "@disable_round_timer//file",
+        "@free_for_all//file",
         "@gungame//file",
         "@map_settings//file",
         "@max_cash//file",
+        "@remove_objectives//file",
+        "@respawn//file",
+        "@spawn_protection//file",
+        "@weapon_cleanup//file",
     ],
 )
 

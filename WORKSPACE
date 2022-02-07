@@ -55,17 +55,38 @@ http_file(
 )
 
 http_file(
-    name = "deathmatch",
-    downloaded_file_path = "lan_of_doom_deathmatch.tar.gz",
-    sha256 = "0f58994ce6c24f63126cec7ea7fddc46731907c93635042dc4942be2aedc0f8e",
-    urls = ["https://lanofdoom.github.io/counterstrike-deathmatch/releases/v1.0.1/lan_of_doom_deathmatch.tar.gz"],
+    name = "disable_buyzones",
+    downloaded_file_path = "disable_buyzones.tar.gz",
+    sha256 = "20a376c6e1acc54f646fa9f551f130e1cd18e8d4b2183e9ba21acabb88c38721",
+    urls = ["https://lanofdoom.github.io/counterstrikesource-disable-buyzones/releases/v1.0.0/lan_of_doom_disable_buyzones.tar.gz"],
+)
+
+http_file(
+    name = "disable_radar",
+    downloaded_file_path = "disable_radar.tar.gz",
+    sha256 = "44f9315fe0eb9e3ee2ea453ed7232464a386ffc2da6a4f2ac17ff902ba9457c3",
+    urls = ["https://lanofdoom.github.io/counterstrikesource-disable-radar/releases/v1.0.0/lan_of_doom_disable_radar.tar.gz"],
+)
+
+http_file(
+    name = "disable_round_timer",
+    downloaded_file_path = "disable_round_timer.tar.gz",
+    sha256 = "c59169da0740f7d09744799929dd4833f6fd2114159cb78e09045c5573862f3b",
+    urls = ["https://lanofdoom.github.io/counterstrikesource-disable-round-timer/releases/v1.0.0/lan_of_doom_disable_round_timer.tar.gz"],
+)
+
+http_file(
+    name = "free_for_all",
+    downloaded_file_path = "free_for_all.tar.gz",
+    sha256 = "22f9f842d6a47af06b769368b46478b6a96e9624e3d06cfb41c3d0786752a4b0",
+    urls = ["https://lanofdoom.github.io/counterstrikesource-free-for-all/releases/v1.0.0/lan_of_doom_ffa.tar.gz"],
 )
 
 http_file(
     name = "gungame",
     downloaded_file_path = "lan_of_doom_gungame.tar.gz",
-    sha256 = "c8b5dd25f839fcc991a12c1c3957f6632589ad088bc1a25fcaf329edd4c24fa1",
-    urls = ["https://lanofdoom.github.io/counterstrike-gungame/releases/v1.0.1/lan_of_doom_gungame.tar.gz"],
+    sha256 = "7352585af57521d90fc17f8d27ce3a66ba8b73c5d0ab1696d615bca9550ec3e9",
+    urls = ["https://lanofdoom.github.io/counterstrike-gungame/releases/v2.0.0/lan_of_doom_gungame.tar.gz"],
 )
 
 http_file(
@@ -78,8 +99,8 @@ http_file(
 http_file(
     name = "map_settings",
     downloaded_file_path = "map_settings.tar.gz",
-    sha256 = "b205d457a36d24c44c7f87c9c9d63b9812c9a156e837c675ee55fab09b79a472",
-    urls = ["https://lanofdoom.github.io/counterstrikesource-map-settings/releases/v1.2.0/lan_of_doom_map_settings.tar.gz"],
+    sha256 = "8e47d0b5776c049b34c97885595548e08eb03a67bd19a9aa77dbff0c01c51126",
+    urls = ["https://lanofdoom.github.io/counterstrikesource-map-settings/releases/v1.3.0/lan_of_doom_map_settings.tar.gz"],
 )
 
 http_file(
@@ -97,10 +118,38 @@ http_file(
 )
 
 http_file(
+    name = "remove_objectives",
+    downloaded_file_path = "respawn.tar.gz",
+    sha256 = "5f6c84e6b4e5da1f07d256edef1ec7ad8a1db92247c12e74d6d22d6fd1186254",
+    urls = ["https://lanofdoom.github.io/counterstrikesource-remove-objectives/releases/v1.0.0/lan_of_doom_remove_objectives.tar.gz"],
+)
+
+http_file(
+    name = "respawn",
+    downloaded_file_path = "respawn.tar.gz",
+    sha256 = "194b158a9b9cdbd790021ceec1f5d5ece3edd5a1cee34e76d5e198abc93ab797",
+    urls = ["https://lanofdoom.github.io/counterstrikesource-respawn/releases/v1.0.0/lan_of_doom_respawn.tar.gz"],
+)
+
+http_file(
+    name = "spawn_protection",
+    downloaded_file_path = "spawn_protection.tar.gz",
+    sha256 = "ae1a845ccd579832f7a3af44c9821957d01816cedbcdf7a8cb26c4e16f3ed5f5",
+    urls = ["https://lanofdoom.github.io/counterstrikesource-spawn-protection/releases/v1.0.0/lan_of_doom_spawn_protection.tar.gz"],
+)
+
+http_file(
     name = "sourcemod",
     downloaded_file_path = "sourcemod.tar.gz",
     sha256 = "da1fa6c77f3268b6eb8bbdb97e9bf1d03f4084b3f0d1933e195752b44332d3b0",
     urls = ["https://sm.alliedmods.net/smdrop/1.10/sourcemod-1.10.0-git6528-linux.tar.gz"],
+)
+
+http_file(
+    name = "weapon_cleanup",
+    downloaded_file_path = "weapon_cleanup.tar.gz",
+    sha256 = "5f22c5595ab5701ba028286616ce6b9fc317739cece77a0c8aa901612e36e7d9",
+    urls = ["https://lanofdoom.github.io/counterstrikesource-weapon-cleanup/releases/v1.0.0/lan_of_doom_weapon_cleanup.tar.gz"],
 )
 
 #
