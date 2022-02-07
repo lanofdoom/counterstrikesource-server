@@ -71,7 +71,7 @@ http_file(
 http_file(
     name = "disable_round_timer",
     downloaded_file_path = "disable_round_timer.tar.gz",
-    sha256 = "c59169da0740f7d09744799929dd4833f6fd2114159cb78e09045c5573862f3b",
+    sha256 = "1a565eff5b9ba92e54db7bba2a23c479583185181d9a411e75a0da621748534c",
     urls = ["https://lanofdoom.github.io/counterstrikesource-disable-round-timer/releases/v1.0.0/lan_of_doom_disable_round_timer.tar.gz"],
 )
 
