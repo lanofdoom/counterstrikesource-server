@@ -85,7 +85,7 @@ http_file(
 http_file(
     name = "gungame",
     downloaded_file_path = "lan_of_doom_gungame.tar.gz",
-    sha256 = "2d1e1c8e398fc74417ea42476af4c51f16fc255ae2c3394970deda85d602f02a",
+    sha256 = "377343c562672a6599d4f30a81d1b95fdf982950f6409dbd7107952d996bc0a7",
     urls = ["https://lanofdoom.github.io/counterstrikesource-gungame/releases/v1.0.0/lan_of_doom_gungame.tar.gz"],
 )
 
@@ -99,7 +99,7 @@ http_file(
 http_file(
     name = "map_settings",
     downloaded_file_path = "map_settings.tar.gz",
-    sha256 = "8e47d0b5776c049b34c97885595548e08eb03a67bd19a9aa77dbff0c01c51126",
+    sha256 = "53ff63530ee322cc00ad4979b6c5c6cbed3588a58530c2070898430917a1c558",
     urls = ["https://lanofdoom.github.io/counterstrikesource-map-settings/releases/v1.3.0/lan_of_doom_map_settings.tar.gz"],
 )
 
@@ -143,13 +143,6 @@ http_file(
     downloaded_file_path = "sourcemod.tar.gz",
     sha256 = "da1fa6c77f3268b6eb8bbdb97e9bf1d03f4084b3f0d1933e195752b44332d3b0",
     urls = ["https://sm.alliedmods.net/smdrop/1.10/sourcemod-1.10.0-git6528-linux.tar.gz"],
-)
-
-http_file(
-    name = "weapon_cleanup",
-    downloaded_file_path = "weapon_cleanup.tar.gz",
-    sha256 = "5f22c5595ab5701ba028286616ce6b9fc317739cece77a0c8aa901612e36e7d9",
-    urls = ["https://lanofdoom.github.io/counterstrikesource-weapon-cleanup/releases/v1.0.0/lan_of_doom_weapon_cleanup.tar.gz"],
 )
 
 #
