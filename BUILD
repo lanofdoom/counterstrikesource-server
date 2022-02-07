@@ -131,7 +131,6 @@ container_layer(
         "@remove_objectives//file",
         "@respawn//file",
         "@spawn_protection//file",
-        "@weapon_cleanup//file",
     ],
 )
 
