@@ -64,7 +64,7 @@ http_file(
 http_file(
     name = "disable_radar",
     downloaded_file_path = "disable_radar.tar.gz",
-    sha256 = "cb6d848268d1149a333303aa5087b4a175fa3cb292f97e76ac398a6484c90995",
+    sha256 = "2e84c3d37e8f44a9e562d4d94d43459c1c41c43ec776542a4cc7558a0487b6b8",
     urls = ["https://lanofdoom.github.io/counterstrikesource-disable-radar/releases/v1.0.0/lan_of_doom_disable_radar.tar.gz"],
 )
 
