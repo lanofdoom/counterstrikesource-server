@@ -64,7 +64,7 @@ http_file(
 http_file(
     name = "disable_radar",
     downloaded_file_path = "disable_radar.tar.gz",
-    sha256 = "44f9315fe0eb9e3ee2ea453ed7232464a386ffc2da6a4f2ac17ff902ba9457c3",
+    sha256 = "cb6d848268d1149a333303aa5087b4a175fa3cb292f97e76ac398a6484c90995",
     urls = ["https://lanofdoom.github.io/counterstrikesource-disable-radar/releases/v1.0.0/lan_of_doom_disable_radar.tar.gz"],
 )
 
@@ -99,7 +99,7 @@ http_file(
 http_file(
     name = "map_settings",
     downloaded_file_path = "map_settings.tar.gz",
-    sha256 = "53ff63530ee322cc00ad4979b6c5c6cbed3588a58530c2070898430917a1c558",
+    sha256 = "2ab7767e57f436a226b1793bd9fb7f8391e032c0cb86d79fce079410f9ecdcf0",
     urls = ["https://lanofdoom.github.io/counterstrikesource-map-settings/releases/v1.3.0/lan_of_doom_map_settings.tar.gz"],
 )
 
