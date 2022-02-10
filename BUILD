@@ -2,7 +2,10 @@ load("@io_bazel_rules_docker//container:container.bzl", "container_image", "cont
 load("@io_bazel_rules_docker//docker/package_managers:download_pkgs.bzl", "download_pkgs")
 load("@io_bazel_rules_docker//docker/package_managers:install_pkgs.bzl", "install_pkgs")
 load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_extract")
-load("@com_github_lanofdoom_steamcmd//:defs.bzl", "steam_depot_layer")
+
+#
+# Build Server Base Image
+#
 
 download_pkgs(
     name = "server_deps",
@@ -25,10 +28,28 @@ install_pkgs(
 # Build Counter-Strike: Source Layer
 #
 
-steam_depot_layer(
-    name = "counterstrikesource",
-    app = "232330",
-    directory = "/opt/game",
+container_run_and_extract(
+    name = "download_counter_strike_source",
+    commands = [
+        "sed -i -e's/ main/ main non-free/g' /etc/apt/sources.list",
+        "echo steam steam/question select 'I AGREE' | debconf-set-selections",
+        "echo steam steam/license note '' | debconf-set-selections",
+        "apt update",
+        "apt install -y steamcmd",
+        "/usr/games/steamcmd +login anonymous +force_install_dir /opt/game +app_update 232330 validate +quit",
+        "rm -rf /opt/game/steamapps",
+        "chown -R nobody:root /opt/game",
+        "tar -czvf /archive.tar.gz /opt/game/",
+    ],
+    extract_file = "/archive.tar.gz",
+    image = ":server_base.tar",
+)
+
+container_layer(
+    name = "counter_strike_source",
+    tars = [
+        ":download_counter_strike_source/archive.tar.gz",
+    ],
 )
 
 #
@@ -198,12 +219,10 @@ container_image(
         "STEAM_API_KEY": "",
     },
     layers = [
-        ":counterstrikesource",
+        ":counter_strike_source",
         ":maps",
         ":sourcemod",
-        ":lanofdoom_server_config",
-        ":lanofdoom_server_plugins",
-        ":lanofdoom_server_entrypoint",
+        ":lanofdoom",
     ],
     symlinks = {"/root/.steam/sdk32/steamclient.so": "/opt/game/bin/steamclient.so"},
     workdir = "/opt/game",
