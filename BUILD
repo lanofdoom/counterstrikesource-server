@@ -126,7 +126,7 @@ container_layer(
 )
 
 #
-# Build LAN of DOOM Plugin and Config Layer
+# Build LAN of DOOM Plugin and Config Layers
 #
 
 container_layer(
@@ -171,34 +171,6 @@ container_layer(
     ],
 )
 
-container_image(
-    name = "config_container",
-    base = ":server_base",
-    layers = [
-        ":lanofdoom_server_config",
-        ":lanofdoom_server_entrypoint",
-        ":lanofdoom_server_plugins",
-        ":lanofdoom_server_rtv_config",
-    ],
-)
-
-container_run_and_extract(
-    name = "build_lanofdoom",
-    commands = [
-        "chown -R nobody:root /opt",
-        "tar -czvf /archive.tar.gz /opt",
-    ],
-    extract_file = "/archive.tar.gz",
-    image = ":config_container.tar",
-)
-
-container_layer(
-    name = "lanofdoom",
-    tars = [
-        ":build_lanofdoom/archive.tar.gz",
-    ],
-)
-
 #
 # Build Final Image
 #
@@ -222,7 +194,10 @@ container_image(
         ":counter_strike_source",
         ":maps",
         ":sourcemod",
-        ":lanofdoom",
+        ":lanofdoom_server_config",
+        ":lanofdoom_server_entrypoint",
+        ":lanofdoom_server_plugins",
+        ":lanofdoom_server_rtv_config",
     ],
     symlinks = {"/root/.steam/sdk32/steamclient.so": "/opt/game/bin/steamclient.so"},
     workdir = "/opt/game",
