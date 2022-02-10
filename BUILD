@@ -1,16 +1,24 @@
 load("@io_bazel_rules_docker//container:container.bzl", "container_image", "container_layer", "container_push")
-load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_commit", "container_run_and_extract")
+load("@io_bazel_rules_docker//docker/package_managers:download_pkgs.bzl", "download_pkgs")
+load("@io_bazel_rules_docker//docker/package_managers:install_pkgs.bzl", "install_pkgs")
+load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_extract")
 load("@com_github_lanofdoom_steamcmd//:defs.bzl", "steam_depot_layer")
 
-container_run_and_commit(
-    name = "server_base",
-    image = "@base_image//image",
-    commands = [
-        "dpkg --add-architecture i386",
-        "apt-get update",
-        "apt-get install -y ca-certificates lib32gcc-s1 libcurl4:i386 libsdl2-2.0-0:i386",
-        "rm -rf /var/lib/apt/lists/*",
+download_pkgs(
+    name = "server_deps",
+    image_tar = "@base_image//image",
+    packages = [
+        "ca-certificates",
+        "libcurl4",
     ],
+)
+
+install_pkgs(
+    name = "server_base",
+    image_tar = "@base_image//image",
+    installables_tar = ":server_deps.tar",
+    installation_cleanup_commands = "rm -rf /var/lib/apt/lists/*",
+    output_image_name = "server_base",
 )
 
 #
@@ -109,6 +117,14 @@ container_layer(
 )
 
 container_layer(
+    name = "lanofdoom_server_rtv_config",
+    directory = "/opt/game/hidden/cfg/sourcemod",
+    files = [
+        ":rtv.cfg",
+    ]
+)
+
+container_layer(
     name = "lanofdoom_server_entrypoint",
     directory = "/opt/game",
     files = [
@@ -141,6 +157,7 @@ container_image(
         ":lanofdoom_server_config",
         ":lanofdoom_server_entrypoint",
         ":lanofdoom_server_plugins",
+        ":lanofdoom_server_rtv_config",
     ],
 )
 

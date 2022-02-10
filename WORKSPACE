@@ -152,6 +152,6 @@ http_file(
 container_pull(
     name = "base_image",
     registry = "index.docker.io",
-    repository = "library/debian",
+    repository = "i386/debian",
     tag = "bullseye-slim",
 )
