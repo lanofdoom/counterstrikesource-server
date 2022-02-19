@@ -53,6 +53,13 @@ http_file(
 )
 
 http_file(
+    name = "ffa_spawns",
+    downloaded_file_path = "ffa_spawns.tar.gz",
+    sha256 = "800003334fde830471a8ef434b7156fc420dcd6e5a3f868f1f63f8147865cd1a",
+    urls = ["https://lanofdoom.github.io/counterstrikesource-ffa-spawns/releases/v0.9.0/lan_of_doom_ffa_spawns.tar.gz"],
+)
+
+http_file(
     name = "free_for_all",
     downloaded_file_path = "free_for_all.tar.gz",
     sha256 = "22f9f842d6a47af06b769368b46478b6a96e9624e3d06cfb41c3d0786752a4b0",
@@ -76,8 +83,8 @@ http_file(
 http_file(
     name = "map_settings",
     downloaded_file_path = "map_settings.tar.gz",
-    sha256 = "2ab7767e57f436a226b1793bd9fb7f8391e032c0cb86d79fce079410f9ecdcf0",
-    urls = ["https://lanofdoom.github.io/counterstrikesource-map-settings/releases/v1.3.0/lan_of_doom_map_settings.tar.gz"],
+    sha256 = "61ff32d090f63f2dc599796f0f7d0542540d76d2a46595447b0555cd9b4f4239",
+    urls = ["https://lanofdoom.github.io/counterstrikesource-map-settings/releases/v1.4.0/lan_of_doom_map_settings.tar.gz"],
 )
 
 http_file(
@@ -92,6 +99,13 @@ http_file(
     downloaded_file_path = "metamod.tar.gz",
     sha256 = "b7fc903755bb3f273afd797b36e94844b828e721d291d2a7519eecad3fa8486c",
     urls = ["https://mms.alliedmods.net/mmsdrop/1.11/mmsource-1.11.0-git1145-linux.tar.gz"],
+)
+
+http_file(
+    name = "paintball",
+    downloaded_file_path = "paintball.tar.gz",
+    sha256 = "5d83d570c62fcb21525845d77abd9e3d044d3d45faf120874b11a71430534a87",
+    urls = ["https://lanofdoom.github.io/counterstrikesource-paintball/releases/v0.8.0/lan_of_doom_paintball.tar.gz"],
 )
 
 http_file(

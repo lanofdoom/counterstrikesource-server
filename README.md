@@ -6,13 +6,21 @@ as used by the LAN of DOOM.
 Run ``docker pull ghcr.io/lanofdoom/counterstrikesource-server:latest``
 
 # Installed Addons
-*  LAN of DOOM Authenticate by Steam Group
-*  LAN of DOOM Deathmatch
-*  LAN of DOOM GunGame
-*  LAN of DOOM Map Settings
-*  LAN of DOOM Max Cash
-*  MetaMod:Source
-*  SourceMod
+* LAN of DOOM Authenticate by Steam Group
+* LAN of DOOM Disable Buyzones
+* LAN of DOOM Disable Radar
+* LAN of DOOM Disable Round Timer
+* LAN of DOOM Free For All
+* Lan of DOOM Free For All Spawns
+* LAN of DOOM GunGame
+* LAN of DOOM Map Settings
+* LAN of DOOM Max Cash
+* LAN of DOOM Paintball
+* LAN of DOOM Remove Objectives
+* LAN of DOOM Respawn
+* LAN of DOOM Spawn Protection
+* MetaMod:Source
+* SourceMod
 
 # Environmental Variables
 ``CSS_HOSTNAME`` The name of the server as listed in Valve's server browser.
