@@ -48,15 +48,15 @@ http_file(
 http_file(
     name = "disable_round_timer",
     downloaded_file_path = "disable_round_timer.tar.gz",
-    sha256 = "b66be55d879fda9cf06c09106d5f8ae024603c0ea51d9268f8c623d23426a5d6",
-    urls = ["https://lanofdoom.github.io/counterstrikesource-disable-round-timer/releases/v1.0.0/lan_of_doom_disable_round_timer.tar.gz"],
+    sha256 = "9655ab21ac776ce87f2e8540fbe520a7ed093ecf8cb51fb99a081d8284eabb03",
+    urls = ["https://lanofdoom.github.io/counterstrikesource-disable-round-timer/releases/v1.0.1/lan_of_doom_disable_round_timer.tar.gz"],
 )
 
 http_file(
     name = "ffa_spawns",
     downloaded_file_path = "ffa_spawns.tar.gz",
-    sha256 = "800003334fde830471a8ef434b7156fc420dcd6e5a3f868f1f63f8147865cd1a",
-    urls = ["https://lanofdoom.github.io/counterstrikesource-ffa-spawns/releases/v0.9.0/lan_of_doom_ffa_spawns.tar.gz"],
+    sha256 = "1e6493251bc9f5fe21e7e6f182f50ad5d7e25b95ee2040902d99adc6e2ac45cc",
+    urls = ["https://lanofdoom.github.io/counterstrikesource-ffa-spawns/releases/v1.0.0/lan_of_doom_ffa_spawns.tar.gz"],
 )
 
 http_file(
@@ -69,8 +69,8 @@ http_file(
 http_file(
     name = "gungame",
     downloaded_file_path = "lan_of_doom_gungame.tar.gz",
-    sha256 = "377343c562672a6599d4f30a81d1b95fdf982950f6409dbd7107952d996bc0a7",
-    urls = ["https://lanofdoom.github.io/counterstrikesource-gungame/releases/v1.0.0/lan_of_doom_gungame.tar.gz"],
+    sha256 = "b801c973125625d586d7a0067e1c317efac1182494babc9879962fd6863dd1b2",
+    urls = ["https://lanofdoom.github.io/counterstrikesource-gungame/releases/v1.0.1/lan_of_doom_gungame.tar.gz"],
 )
 
 http_file(
