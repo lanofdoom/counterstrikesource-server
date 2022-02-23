@@ -27,6 +27,18 @@ container_layer(
 )
 
 #
+# MetaMod Layer
+#
+
+container_layer(
+    name = "metamod",
+    directory = "/opt/game/cstrike",
+    tars = [
+        "@metamod//file",
+    ],
+)
+
+#
 # SourceMod Layer
 #
 
@@ -34,20 +46,30 @@ container_layer(
     name = "sourcemod",
     directory = "/opt/game/cstrike",
     tars = [
-        "@metamod//file",
         "@sourcemod//file",
     ],
 )
 
 #
-# Plugins Layer
+# Authorization Layer
+#
+
+container_layer(
+    name = "authorization",
+    directory = "/opt/game/cstrike",
+    tars = [
+        "@auth_by_steam_group//file",
+    ],
+)
+
+#
+# Plugins Layers
 #
 
 container_layer(
     name = "plugins",
     directory = "/opt/game/cstrike",
     tars = [
-        "@auth_by_steam_group//file",
         "@disable_buyzones//file",
         "@disable_radar//file",
         "@disable_round_timer//file",
@@ -120,7 +142,9 @@ container_image(
     layers = [
         ":counter_strike_source",
         ":maps",
+        ":metamod",
         ":sourcemod",
+        ":authorization",
         ":plugins",
         ":config",
     ],
