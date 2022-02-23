@@ -132,8 +132,8 @@ http_file(
 http_file(
     name = "sourcemod",
     downloaded_file_path = "sourcemod.tar.gz",
-    sha256 = "da1fa6c77f3268b6eb8bbdb97e9bf1d03f4084b3f0d1933e195752b44332d3b0",
-    urls = ["https://sm.alliedmods.net/smdrop/1.10/sourcemod-1.10.0-git6528-linux.tar.gz"],
+    sha256 = "9f59ddf32a649695e4c7dac0dfebdc382590486e60ff6473d7b87a31b6bfa01b",
+    urls = ["https://sm.alliedmods.net/smdrop/1.10/sourcemod-1.10.0-git6529-linux.tar.gz"],
 )
 
 #
