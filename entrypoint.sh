@@ -13,11 +13,8 @@ touch /opt/game/cstrike/addons/sourcemod/configs/maplists.cfg
 touch /opt/game/cstrike/cfg/sourcemod/mapchooser.cfg
 touch /opt/game/cstrike/cfg/sourcemod/rtv.cfg
 
-# Grant ownership of game directory to nobody (takes about 20 seconds)
-chown -R nobody /opt/game
-
-# Run server as nobody
-su nobody -p -s /bin/bash -- /opt/game/srcds_run \
+# Call srcds_linux instead of srcds_run to avoid restart logic
+LD_LIBRARY_PATH="/opt/game:/opt/game/bin:${LD_LIBRARY_PATH:-}" /opt/game/srcds_linux \
     -game cstrike \
     -port "$CSS_PORT" \
     -strictbindport \
