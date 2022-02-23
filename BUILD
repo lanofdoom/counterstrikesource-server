@@ -66,12 +66,11 @@ container_layer(
 )
 
 #
-# Build SourceMod Layer
+# SourceMod Layer
 #
 
-container_image(
-    name = "sourcemod_container",
-    base = "@base_image//image",
+container_layer(
+    name = "sourcemod",
     directory = "/opt/game/cstrike",
     tars = [
         "@metamod//file",
@@ -79,38 +78,12 @@ container_image(
     ],
 )
 
-container_run_and_extract(
-    name = "build_sourcemod",
-    commands = [
-        "cd /opt/game/cstrike/addons/sourcemod",
-        "chown -R nobody:root /opt",
-        "tar -czvf /archive.tar.gz /opt",
-    ],
-    extract_file = "/archive.tar.gz",
-    image = ":sourcemod_container.tar",
-)
-
-container_layer(
-    name = "sourcemod",
-    tars = [
-        ":build_sourcemod/archive.tar.gz",
-    ],
-)
-
 #
-# Build LAN of DOOM Plugin and Config Layers
+# Plugins Layer
 #
 
 container_layer(
-    name = "lanofdoom_server_config",
-    directory = "/opt/game/cstrike/cfg",
-    files = [
-        ":server.cfg",
-    ],
-)
-
-container_layer(
-    name = "lanofdoom_server_plugins",
+    name = "plugins",
     directory = "/opt/game/cstrike",
     tars = [
         "@auth_by_steam_group//file",
@@ -129,29 +102,15 @@ container_layer(
     ],
 )
 
-container_image(
-    name = "config_container",
-    base = "@base_image//image",
-    layers = [
-        ":lanofdoom_server_config",
-        ":lanofdoom_server_plugins",
-    ],
-)
-
-container_run_and_extract(
-    name = "build_lanofdoom",
-    commands = [
-        "chown -R nobody:root /opt",
-        "tar -czvf /archive.tar.gz /opt",
-    ],
-    extract_file = "/archive.tar.gz",
-    image = ":config_container.tar",
-)
+#
+# Config Layer
+#
 
 container_layer(
-    name = "lanofdoom",
-    tars = [
-        ":build_lanofdoom/archive.tar.gz",
+    name = "config",
+    directory = "/opt/game/cstrike/cfg",
+    files = [
+        ":server.cfg",
     ],
 )
 
@@ -201,7 +160,8 @@ container_image(
         ":counter_strike_source",
         ":maps",
         ":sourcemod",
-        ":lanofdoom",
+        ":plugins",
+        ":config",
     ],
 )
 
