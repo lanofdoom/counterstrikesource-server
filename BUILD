@@ -1,67 +1,28 @@
 load("@io_bazel_rules_docker//container:container.bzl", "container_image", "container_layer", "container_push")
 load("@io_bazel_rules_docker//docker/package_managers:download_pkgs.bzl", "download_pkgs")
 load("@io_bazel_rules_docker//docker/package_managers:install_pkgs.bzl", "install_pkgs")
-load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_extract")
+load("@com_github_lanofdoom_steamcmd//:defs.bzl", "steam_depot_layer")
 
 #
-# Build Counter-Strike: Source Layer
+# Counter-Strike: Source Layer
 #
 
-container_run_and_extract(
-    name = "download_counter_strike_source",
-    commands = [
-        "sed -i -e's/ main/ main non-free/g' /etc/apt/sources.list",
-        "echo steam steam/question select 'I AGREE' | debconf-set-selections",
-        "echo steam steam/license note '' | debconf-set-selections",
-        "apt update",
-        "apt install -y ca-certificates steamcmd",
-        "/usr/games/steamcmd +login anonymous +force_install_dir /opt/game +app_update 232330 validate +quit",
-        "rm -rf /opt/game/steamapps",
-        "chown -R nobody:root /opt/game",
-        "tar -czvf /archive.tar.gz /opt/game/",
-    ],
-    extract_file = "/archive.tar.gz",
-    image = "@base_image//image",
-)
-
-container_layer(
+steam_depot_layer(
     name = "counter_strike_source",
-    tars = [
-        ":download_counter_strike_source/archive.tar.gz",
-    ],
+    app = "232330",
+    directory = "/opt/game",
 )
 
 #
-# Build Maps Layer
+# Maps Layer
 #
-
-container_image(
-    name = "maps_container",
-    base = "@base_image//image",
-    directory = "/opt/game/cstrike",
-    tars = [
-        "@maps//file",
-    ],
-)
-
-container_run_and_extract(
-    name = "build_maps",
-    commands = [
-        "apt update && apt install bzip2",
-        "cd /opt/game/cstrike",
-        "./make_bz2_files.sh",
-        "rm *.sh *.md *license",
-        "chown -R nobody:root /opt",
-        "tar -czvf /archive.tar.gz /opt",
-    ],
-    extract_file = "/archive.tar.gz",
-    image = ":maps_container.tar",
-)
 
 container_layer(
     name = "maps",
+    directory = "/opt/game/cstrike",
     tars = [
-        ":build_maps/archive.tar.gz",
+        "@maps//file",
+        "@maps_bz2//file",
     ],
 )
 
@@ -115,7 +76,7 @@ container_layer(
 )
 
 #
-# Build Server Base Image
+# Base Image
 #
 
 download_pkgs(
@@ -136,7 +97,7 @@ install_pkgs(
 )
 
 #
-# Build Final Image
+# Final Image
 #
 
 container_image(

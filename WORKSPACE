@@ -21,6 +21,29 @@ container_deps()
 load("@io_bazel_rules_docker//container:container.bzl", "container_pull")
 
 #
+# Steam Dependencies
+#
+
+http_archive(
+    name = "com_github_lanofdoom_steamcmd",
+    sha256 = "",
+    strip_prefix = "steamcmd-145893649026af482aca342fcd23b1af70622ed7",
+    urls = ["https://github.com/lanofdoom/steamcmd/archive/145893649026af482aca342fcd23b1af70622ed7.zip"],
+)
+
+load("@com_github_lanofdoom_steamcmd//:repositories.bzl", "steamcmd_repos")
+
+steamcmd_repos()
+
+load("@com_github_lanofdoom_steamcmd//:deps.bzl", "steamcmd_deps")
+
+steamcmd_deps()
+
+load("@com_github_lanofdoom_steamcmd//:nugets.bzl", "steamcmd_nugets")
+
+steamcmd_nugets()
+
+#
 # Server Dependencies
 #
 
@@ -76,8 +99,15 @@ http_file(
 http_file(
     name = "maps",
     downloaded_file_path = "maps.tar.xz",
-    sha256 = "243958acdc7298c2b140f4eda3061ad7855d3db2687147920282364e610ac703",
-    urls = ["https://lanofdoom.github.io/counterstrikesource-maps/releases/v6.0.0/maps.tar.xz"],
+    sha256 = "3bd4cd6c3b896371a4d961e6141790ca215617d0f0151707c5b1e75328f5efdd",
+    urls = ["https://lanofdoom.github.io/counterstrikesource-maps/releases/v6.0.1/maps.tar.xz"],
+)
+
+http_file(
+    name = "maps_bz2",
+    downloaded_file_path = "maps_bz2.tar.xz",
+    sha256 = "4ebf348125ebe472ab2acc5823487fa240a537264fbe92f91ad33aa16700f97e",
+    urls = ["https://lanofdoom.github.io/counterstrikesource-maps/releases/v6.0.1/maps_bz2.tar.xz"],
 )
 
 http_file(
