@@ -148,6 +148,9 @@ container_image(
         ":plugins",
         ":config",
     ],
+    symlinks = {
+        "/root/.steam/sdk32/steamclient.so": "/opt/game/bin/steamclient.so"
+    },
 )
 
 container_push(
