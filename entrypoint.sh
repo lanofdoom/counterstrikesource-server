@@ -1,7 +1,5 @@
 #!/bin/bash -ue
 
-[ -z "${CSS_ADMIN}" ] || echo "${CSS_ADMIN} \"99:z\"" > /opt/game/cstrike/addons/sourcemod/configs/admins_simple.ini
-
 [ -z "${CSS_MOTD}" ] || echo "${CSS_MOTD}" > /opt/game/cstrike/motd.txt
 
 # Generate mapcycle here to cut down on image build time and space usage.
@@ -10,8 +8,13 @@ ls /opt/game/cstrike/maps/*.bsp | grep -v test | sed -e 's/.*\/\([^\/]*\).bsp/\1
 # Touch this file to workaround an issue in sourcemod
 touch /opt/game/cstrike/addons/sourcemod/configs/maplists.cfg
 
-# Call srcds_linux instead of srcds_run to avoid restart logic
-LD_LIBRARY_PATH="/opt/game:/opt/game/bin:${LD_LIBRARY_PATH:-}" /opt/game/srcds_linux \
+# Touch these files to prevent sourcemod from creating them and overriding
+# values sent in server.cfg
+touch /opt/game/cstrike/cfg/sourcemod/mapchooser.cfg
+touch /opt/game/cstrike/cfg/sourcemod/rtv.cfg
+
+# Run server as nobody
+su nobody -p -s /bin/bash -- /opt/game/srcds_run \
     -game cstrike \
     -port "$CSS_PORT" \
     -strictbindport \
