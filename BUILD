@@ -66,7 +66,7 @@ container_layer(
 )
 
 #
-# Build Sourcemod Layer
+# Build SourceMod Layer
 #
 
 container_image(
@@ -83,13 +83,6 @@ container_run_and_extract(
     name = "build_sourcemod",
     commands = [
         "cd /opt/game/cstrike/addons/sourcemod",
-        "mv plugins/basevotes.smx plugins/disabled/basevotes.smx",
-        "mv plugins/funcommands.smx plugins/disabled/funcommands.smx",
-        "mv plugins/funvotes.smx plugins/disabled/funvotes.smx",
-        "mv plugins/playercommands.smx plugins/disabled/playercommands.smx",
-        "mv plugins/disabled/mapchooser.smx plugins/mapchooser.smx",
-        "mv plugins/disabled/rockthevote.smx plugins/rockthevote.smx",
-        "mv plugins/disabled/nominations.smx plugins/nominations.smx",
         "chown -R nobody:root /opt",
         "tar -czvf /archive.tar.gz /opt",
     ],
@@ -113,22 +106,6 @@ container_layer(
     directory = "/opt/game/cstrike/cfg",
     files = [
         ":server.cfg",
-    ],
-)
-
-container_layer(
-    name = "lanofdoom_server_rtv_config",
-    directory = "/opt/game/cstrike/cfg/sourcemod",
-    files = [
-        ":rtv.cfg",
-    ]
-)
-
-container_layer(
-    name = "lanofdoom_server_entrypoint",
-    directory = "/opt/game",
-    files = [
-        ":entrypoint.sh",
     ],
 )
 
@@ -157,9 +134,7 @@ container_image(
     base = "@base_image//image",
     layers = [
         ":lanofdoom_server_config",
-        ":lanofdoom_server_entrypoint",
         ":lanofdoom_server_plugins",
-        ":lanofdoom_server_rtv_config",
     ],
 )
 
@@ -208,9 +183,8 @@ install_pkgs(
 container_image(
     name = "server_image",
     base = ":server_base",
-    entrypoint = ["/opt/game/entrypoint.sh"],
+    entrypoint = ["/entrypoint.sh"],
     env = {
-        "CSS_ADMIN": "",
         "CSS_HOSTNAME": "",
         "CSS_MAP": "de_dust2",
         "CSS_MOTD": "",
@@ -220,13 +194,15 @@ container_image(
         "STEAM_GROUP_ID": "",
         "STEAM_API_KEY": "",
     },
+    files = [
+        ":entrypoint.sh",
+    ],
     layers = [
         ":counter_strike_source",
         ":maps",
         ":sourcemod",
         ":lanofdoom",
     ],
-    user = "nobody",
 )
 
 container_push(
