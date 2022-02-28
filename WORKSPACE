@@ -134,8 +134,8 @@ http_file(
 http_file(
     name = "paintball",
     downloaded_file_path = "paintball.tar.gz",
-    sha256 = "5d83d570c62fcb21525845d77abd9e3d044d3d45faf120874b11a71430534a87",
-    urls = ["https://lanofdoom.github.io/counterstrikesource-paintball/releases/v0.8.0/lan_of_doom_paintball.tar.gz"],
+    sha256 = "cd5d0d9debe0aa2724dfeffa193d27dff69f880493d56bf67146ee2cf65fd682",
+    urls = ["https://lanofdoom.github.io/counterstrikesource-paintball/releases/v0.9.0/lan_of_doom_paintball.tar.gz"],
 )
 
 http_file(
