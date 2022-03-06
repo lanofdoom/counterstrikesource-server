@@ -11,7 +11,7 @@ Run ``docker pull ghcr.io/lanofdoom/counterstrikesource-server:latest``
 * LAN of DOOM Disable Radar
 * LAN of DOOM Disable Round Timer
 * LAN of DOOM Free For All
-* Lan of DOOM Free For All Spawns
+* LAN of DOOM Free For All Spawns
 * LAN of DOOM GunGame
 * LAN of DOOM Map Settings
 * LAN of DOOM Max Cash
