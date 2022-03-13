@@ -91,7 +91,7 @@ container_layer(
 
 container_layer(
     name = "config",
-    directory = "/opt/game/cstrike/cfg",
+    directory = "/opt/game/cstrike/cfg/templates",
     files = [
         ":server.cfg",
     ],
