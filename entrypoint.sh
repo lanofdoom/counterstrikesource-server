@@ -13,6 +13,11 @@ touch /opt/game/cstrike/addons/sourcemod/configs/maplists.cfg
 touch /opt/game/cstrike/cfg/sourcemod/mapchooser.cfg
 touch /opt/game/cstrike/cfg/sourcemod/rtv.cfg
 
+# Update server config file
+cp /opt/game/cstrike/cfg/templates/server.cfg /opt/game/cstrike/cfg/server.cfg
+echo "// Added by entrypoint.sh" >> /opt/game/cstrike/cfg/server.cfg
+echo "hostname \"$CSS_HOSTNAME\"" >> /opt/game/cstrike/cfg/server.cfg
+
 # Call srcds_linux instead of srcds_run to avoid restart logic
 LD_LIBRARY_PATH="/opt/game:/opt/game/bin:${LD_LIBRARY_PATH:-}" /opt/game/srcds_linux \
     -game cstrike \
@@ -21,7 +26,6 @@ LD_LIBRARY_PATH="/opt/game:/opt/game/bin:${LD_LIBRARY_PATH:-}" /opt/game/srcds_l
     -usercon \
     +ip 0.0.0.0 \
     +map "$CSS_MAP" \
-    +hostname "$CSS_HOSTNAME" \
     +rcon_password "$RCON_PASSWORD" \
     +sv_password "$CSS_PASSWORD" \
     +sm_auth_by_steam_group_group_id "$STEAM_GROUP_ID" \
