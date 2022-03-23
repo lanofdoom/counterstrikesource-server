@@ -113,8 +113,8 @@ http_file(
 http_file(
     name = "map_settings",
     downloaded_file_path = "map_settings.tar.gz",
-    sha256 = "5541d38ca033d015ec67ed6b0bd08c1e9153ea3cabf4c9ff4c882b6c49c0e210",
-    urls = ["https://lanofdoom.github.io/counterstrikesource-map-settings/releases/v1.5.0/lan_of_doom_map_settings.tar.gz"],
+    sha256 = "f930ee3ea006ad974255aad34e1762618572b14290f0dabc3d84d12de584033c",
+    urls = ["https://lanofdoom.github.io/counterstrikesource-map-settings/releases/v1.6.0/lan_of_doom_map_settings.tar.gz"],
 )
 
 http_file(
