@@ -1,0 +1,46 @@
+module(name = "counterstrikesource_server")
+
+bazel_dep(name = "rules_pkg", version = "0.9.1")
+bazel_dep(name = "rules_oci", version = "1.4.3")
+bazel_dep(name = "rules_steam")
+
+git_override(
+    module_name = "rules_steam",
+    commit = "9279e451e300a4e1be7bd79f2b712eb747606310",
+    remote = "https://github.com/lanofdoom/rules_steam.git",
+)
+
+steam = use_extension("@rules_steam//:steam.bzl", "steam")
+steam.app(name = "counter_strike_source", app = "232330")
+use_repo(steam, "counter_strike_source")
+
+oci = use_extension("@rules_oci//oci:extensions.bzl", "oci")
+
+oci.pull(
+    name = "debian_i386",
+    digest = "sha256:1fbc487d3fdb366431a282d1b16e8ac9970a6394807588abe260eae4987d04c6",  # bookworm-slim
+    image = "docker.io/i386/debian",
+)
+use_repo(oci, "debian_i386")
+
+repos = use_extension("//:repos.bzl", "repos_bzlmod")
+use_repo(
+    repos,
+    "auth_by_steam_group",
+    "disable_buyzones",
+    "disable_radar",
+    "disable_round_timer",
+    "ffa_spawns",
+    "free_for_all",
+    "gungame",
+    "maps",
+    "maps_bz2",
+    "map_settings",
+    "max_cash",
+    "metamod",
+    "paintball",
+    "remove_objectives",
+    "respawn",
+    "spawn_protection",
+    "sourcemod",
+)

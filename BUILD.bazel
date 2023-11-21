@@ -1,0 +1,143 @@
+load("@rules_pkg//:pkg.bzl", "pkg_tar")
+load("@rules_oci//oci:defs.bzl", "oci_image", "oci_push", "oci_tarball")
+
+#
+# Counter-Strike: Source Layer
+#
+
+pkg_tar(
+    name = "counterstrikesource_layer",
+    srcs = ["@counter_strike_source//:files"],
+    package_dir = "/opt/game",
+)
+
+#
+# Maps Layer
+#
+
+pkg_tar(
+    name = "maps_layer",
+    package_dir = "/opt/game/cstrike",
+    deps = [
+        "@maps//file",
+        "@maps_bz2//file",
+    ],
+)
+
+#
+# MetaMod Layer
+#
+
+pkg_tar(
+    name = "metamod_layer",
+    deps = ["@metamod//file"],
+    package_dir = "/opt/game/cstrike",
+)
+
+#
+# SourceMod Layer
+#
+
+pkg_tar(
+    name = "sourcemod_layer",
+    deps = ["@sourcemod//file"],
+    empty_dirs = ["/opt/game/cstrike/addons/souremod/configs"],
+    package_dir = "/opt/game/cstrike",
+)
+
+#
+# Authorization Layer
+#
+
+pkg_tar(
+    name = "authorization_layer",
+    package_dir = "/opt/game/cstrike",
+    deps = ["@auth_by_steam_group//file"],
+)
+
+#
+# Plugins Layers
+#
+
+pkg_tar(
+    name = "plugins_layer",
+    package_dir = "/opt/game/cstrike",
+    deps = [
+        "@disable_buyzones//file",
+        "@disable_radar//file",
+        "@disable_round_timer//file",
+        "@ffa_spawns//file",
+        "@free_for_all//file",
+        "@gungame//file",
+        "@map_settings//file",
+        "@max_cash//file",
+        "@paintball//file",
+        "@remove_objectives//file",
+        "@respawn//file",
+        "@spawn_protection//file",
+    ],
+)
+
+#
+# Config Layer
+#
+
+pkg_tar(
+    name = "config_layer",
+    srcs = [":server.cfg"],
+    package_dir = "/opt/game/cstrike/cfg/templates",
+)
+
+# TODO: libcurl
+
+#
+# Final Image
+#
+
+pkg_tar(
+    name = "entrypoint_layer",
+    srcs = [":entrypoint.sh"],
+    package_dir = "/",
+    symlinks = {
+        "/root/.steam/sdk32/steamclient.so": "/opt/game/bin/steamclient.so",
+    },
+)
+
+oci_image(
+    name = "image",
+    base = "@debian_i386",
+    entrypoint = ["/entrypoint.sh"],
+    env = {
+        "CSS_HOSTNAME": "",
+        "CSS_MAP": "de_dust2",
+        "CSS_MOTD": "",
+        "CSS_PASSWORD": "",
+        "CSS_PORT": "27015",
+        "RCON_PASSWORD": "",
+        "STEAM_GROUP_ID": "",
+        "STEAM_API_KEY": "",
+    },
+    tars = [
+        ":counterstrikesource_layer",
+        ":maps_layer",
+        ":metamod_layer",
+        ":sourcemod_layer",
+        ":authorization_layer",
+        ":plugins_layer",
+        ":config_layer",
+        ":entrypoint_layer",
+    ],
+)
+
+oci_tarball(
+    name = "image_tarball",
+    image = ":image",
+    repo_tags = ["counterstrikesource-server:bazel"],
+)
+
+oci_push(
+    name = "image_push",
+    image = ":image",
+    remote_tags = ["latest"],
+    repository = "lanofdoom/counterstrikesource-server",
+)
