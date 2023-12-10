@@ -139,5 +139,5 @@ oci_push(
     name = "image_push",
     image = ":image",
     remote_tags = ["latest"],
-    repository = "lanofdoom/counterstrikesource-server",
+    repository = "ghcr.io/lanofdoom/counterstrikesource-server",
 )
