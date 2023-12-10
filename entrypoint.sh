@@ -1,5 +1,10 @@
 #!/bin/bash -ue
 
+# These packages are required for auth_by_steam_group.
+# TODO: gross... why is it so hard to do this any other way?
+apt update
+apt install -y ca-certificates libcurl4
+
 [ -z "${CSS_MOTD}" ] || echo "${CSS_MOTD}" > /opt/game/cstrike/motd.txt
 
 # Generate mapcycle here to cut down on image build time and space usage.
@@ -17,6 +22,8 @@ touch /opt/game/cstrike/cfg/sourcemod/rtv.cfg
 cp /opt/game/cstrike/cfg/templates/server.cfg /opt/game/cstrike/cfg/server.cfg
 echo "// Added by entrypoint.sh" >> /opt/game/cstrike/cfg/server.cfg
 echo "hostname \"$CSS_HOSTNAME\"" >> /opt/game/cstrike/cfg/server.cfg
+
+chmod +x /opt/game/srcds_linux
 
 # Call srcds_linux instead of srcds_run to avoid restart logic
 LD_LIBRARY_PATH="/opt/game:/opt/game/bin:${LD_LIBRARY_PATH:-}" /opt/game/srcds_linux \
