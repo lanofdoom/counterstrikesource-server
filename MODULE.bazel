@@ -34,7 +34,6 @@ use_repo(
     "free_for_all",
     "gungame",
     "maps",
-    "maps_bz2",
     "map_settings",
     "max_cash",
     "metamod",

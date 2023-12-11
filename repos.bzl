@@ -59,15 +59,8 @@ def repos(bzlmod = False):
     http_file(
         name = "maps",
         downloaded_file_path = "maps.tar.xz",
-        sha256 = "3bd4cd6c3b896371a4d961e6141790ca215617d0f0151707c5b1e75328f5efdd",
-        urls = ["https://github.com/lanofdoom/counterstrikesource-maps/releases/download/v6.0.1/maps.tar.xz"],
-    )
-
-    http_file(
-        name = "maps_bz2",
-        downloaded_file_path = "maps_bz2.tar.xz",
-        sha256 = "4ebf348125ebe472ab2acc5823487fa240a537264fbe92f91ad33aa16700f97e",
-        urls = ["https://github.com/lanofdoom/counterstrikesource-maps/releases/download/v6.0.1/maps_bz2.tar.xz"],
+        sha256 = "d3507888276f0398c18dcbc09d41dbd44565ae0b068f065d95927a8368f9cea0",
+        urls = ["https://github.com/lanofdoom/counterstrikesource-maps/releases/download/v6.1.0/maps.tar.xz"],
     )
 
     http_file(

@@ -20,7 +20,6 @@ pkg_tar(
     package_dir = "/opt/game/cstrike",
     deps = [
         "@maps//file",
-        "@maps_bz2//file",
     ],
 )
 
