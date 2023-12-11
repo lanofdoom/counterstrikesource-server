@@ -100,7 +100,7 @@ def repos(bzlmod = False):
 
     http_file(
         name = "remove_objectives",
-        downloaded_file_path = "respawn.tar.gz",
+        downloaded_file_path = "remove_objectives.tar.gz",
         sha256 = "5f6c84e6b4e5da1f07d256edef1ec7ad8a1db92247c12e74d6d22d6fd1186254",
         urls = ["https://github.com/lanofdoom/counterstrikesource-remove-objectives/releases/download/v1.0.0/lan_of_doom_remove_objectives.tar.gz"],
     )
@@ -109,7 +109,7 @@ def repos(bzlmod = False):
         name = "respawn",
         downloaded_file_path = "respawn.tar.gz",
         sha256 = "194b158a9b9cdbd790021ceec1f5d5ece3edd5a1cee34e76d5e198abc93ab797",
-        urls = ["https://lanofdoom.github.io/counterstrikesource-respawn/releases/v1.0.0/lan_of_doom_respawn.tar.gz"],
+        urls = ["https://github.com/lanofdoom/counterstrikesource-respawn/releases/download/v1.0.0/lan_of_doom_respawn.tar.gz"],
     )
 
     http_file(
