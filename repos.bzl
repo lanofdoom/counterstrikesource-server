@@ -38,8 +38,8 @@ def repos(bzlmod = False):
     http_file(
         name = "ffa_spawns",
         downloaded_file_path = "ffa_spawns.tar.gz",
-        sha256 = "1e6493251bc9f5fe21e7e6f182f50ad5d7e25b95ee2040902d99adc6e2ac45cc",
-        urls = ["https://github.com/lanofdoom/counterstrikesource-ffa-spawns/releases/download/v1.0.0/lan_of_doom_ffa_spawns.tar.gz"],
+        sha256 = "707056ff3b7aabbcca0bcae62eca55a4969dc8df0c1f7bae817567c0fe73e6b0",
+        urls = ["https://github.com/lanofdoom/counterstrikesource-ffa-spawns/releases/download/v1.0.1/lan_of_doom_ffa_spawns.tar.gz"],
     )
 
     http_file(
