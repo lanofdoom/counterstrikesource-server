@@ -1,10 +1,9 @@
 #!/bin/bash -ue
 
-# These packages are required for auth_by_steam_group.
-# TODO: gross... why is it so hard to do this any other way?
-apt update
-apt install -y ca-certificates libcurl4
+# Install auth_by_steam_group dependencies
+apt-get update && apt-get install -y ca-certificates libcurl4
 
+# Set MOTD
 [ -z "${CSS_MOTD}" ] || echo "${CSS_MOTD}" > /opt/game/cstrike/motd.txt
 
 # Generate mapcycle here to cut down on image build time and space usage.
