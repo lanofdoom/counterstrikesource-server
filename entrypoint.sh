@@ -22,6 +22,7 @@ cp /opt/game/cstrike/cfg/templates/server.cfg /opt/game/cstrike/cfg/server.cfg
 echo "// Added by entrypoint.sh" >> /opt/game/cstrike/cfg/server.cfg
 echo "hostname \"$CSS_HOSTNAME\"" >> /opt/game/cstrike/cfg/server.cfg
 
+# Mark srcds_linux as executable
 chmod +x /opt/game/srcds_linux
 
 # Call srcds_linux instead of srcds_run to avoid restart logic
