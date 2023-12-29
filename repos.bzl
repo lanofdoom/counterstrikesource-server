@@ -66,8 +66,8 @@ def repos(bzlmod = False):
     http_file(
         name = "map_settings",
         downloaded_file_path = "map_settings.tar.gz",
-        sha256 = "f930ee3ea006ad974255aad34e1762618572b14290f0dabc3d84d12de584033c",
-        urls = ["https://github.com/lanofdoom/counterstrikesource-map-settings/releases/download/v1.6.0/lan_of_doom_map_settings.tar.gz"],
+        sha256 = "1e16ed149806bdda69d618cacd3c2cea3d60bd99fd856173d6f9b061a68c3892",
+        urls = ["https://github.com/lanofdoom/counterstrikesource-map-settings/releases/download/v1.7.0/lan_of_doom_map_settings.tar.gz"],
     )
 
     http_file(
