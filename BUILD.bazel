@@ -40,7 +40,7 @@ pkg_tar(
 pkg_tar(
     name = "sourcemod_layer",
     deps = ["@sourcemod//file"],
-    empty_dirs = ["/opt/game/cstrike/addons/souremod/configs"],
+    empty_dirs = ["/opt/game/cstrike/addons/sourcemod/configs"],
     package_dir = "/opt/game/cstrike",
 )
 
